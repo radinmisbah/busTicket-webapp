@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch BusTicketWebappApplication",
+            "request": "launch",
+            "mainClass": "net.javaguides.springboot.BusTicketWebappApplication",
+            "projectName": "employee-management-webapp"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EmployeeManagementWebappApplication<employee-management-webapp>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "net.javaguides.springboot.EmployeeManagementWebappApplication",
+            "projectName": "employee-management-webapp",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

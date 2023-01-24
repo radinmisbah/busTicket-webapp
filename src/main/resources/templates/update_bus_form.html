@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Bus Management System</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container">
+		<h1>Bus Management System</h1>
+		<hr>
+		<h2>Update Bus Service</h2>
+
+        <form action="#" th:action="@{/saveBus}" th:object="${bus}"
+			method="POST">
+
+            <!-- Add hidden form field to handle update -->
+			<input type="hidden" th:field="*{id}" />
+
+			<input type="text" th:field="*{busName}"
+				placeholder="Bus Company Name" class="form-control mb-4 col-4">
+				
+				<input type="text" th:field="*{departure}"
+				placeholder="Depart From" class="form-control mb-4 col-4">
+				
+				<input type="text" th:field="*{arrival}"
+				placeholder="Destination" class="form-control mb-4 col-4">
+
+                <label for="maxSeat" >Maximum Available Seat</label>
+                <input type="number" th:field="*{maxSeat}"
+				name="maxSeat" class="form-control mb-4 col-4">
+
+                <label for="departureTime" >Departure Time</label>
+                <input type="time" th:field="*{departureTime}"
+				name = "departureTime" class="form-control mb-4 col-4">
+
+                <label for="ticketPrice">Ticket Price</label>
+                <input type="number" step="0.01" th:field="*{price}" 
+                class="form-control mb-4 col-4" name="ticketPrice">
+
+        
+				<button type="submit" class="btn btn-info col-2">Save Bus Service</button>
+		</form>
+
+	
+		<hr>
+		
+		<a th:href = "@{/viewManageBus}"> Back to Bus Service List</a>
+	</div>
+</body>
+</html>
