@@ -25,7 +25,7 @@ public class BusController {
 
     //redirect to manage bus page
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/viewManageBus")
+    @GetMapping("/admin/viewManageBus")
 	public String viewManageBus(Model model) {
 		return findPaginated(1, "busName", "asc", model);		
 	}
@@ -44,7 +44,7 @@ public class BusController {
 	public String saveNewBus(@ModelAttribute("bus") Bus bus) {
 		// save bus to database
 		busService.create(bus);
-		return "redirect:/viewManageBus";
+		return "redirect:/admin/viewManageBus";
 	}
 
     @GetMapping("/showBusUpdateForm/{id}")
@@ -63,11 +63,36 @@ public class BusController {
 		
 		// call delete bus method 
 		busService.deleteBusById(id);
-		return "redirect:/viewManageBus";
+		return "redirect:/admin/viewManageBus";
 	}
 
-	
-@GetMapping("/searchBus")
+	    //mapping for page if the the list too long
+		@GetMapping("/admin/manage_bus/page/{pageNo}")
+		public String findPaginated(@PathVariable (value = "pageNo") int pageNo, 
+				@RequestParam("sortField") String sortField,
+				@RequestParam("sortDir") String sortDir,
+				Model model) {
+			int pageSize = 5;
+			
+			Page<Bus> page = busService.findPaginated(pageNo, pageSize, sortField, sortDir);
+			List<Bus> listBus = page.getContent();
+			
+			model.addAttribute("currentPage", pageNo);
+			model.addAttribute("totalPages", page.getTotalPages());
+			model.addAttribute("totalItems", page.getTotalElements());
+			
+			model.addAttribute("sortField", sortField);
+			model.addAttribute("sortDir", sortDir);
+			model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
+			
+			model.addAttribute("listBus", listBus);
+			return "manage_bus";
+		}
+
+
+//controller mapping for user page	
+
+@GetMapping("/user/searchBus")
 public String searchTicket(Model model, @RequestParam("departure") String departure, @RequestParam("arrival") String arrival, @RequestParam("departureDate") Date departureDate) {
     List<Bus> buses = busService.searchBus(departure, arrival);
 	model.addAttribute("buses", buses);
@@ -77,7 +102,7 @@ public String searchTicket(Model model, @RequestParam("departure") String depart
 
     @PreAuthorize("hasRole('ROLE_USER')")
     //redirect to form to search new bus
-    @GetMapping("/showSearchBusForm")
+    @GetMapping("/user/showSearchBusForm")
 	public String showSearchBusForm(Model model) {
 		// create model attribute to bind form data
 		Bus bus = new Bus();
@@ -86,26 +111,5 @@ public String searchTicket(Model model, @RequestParam("departure") String depart
 	}
 
 
-    //mapping for page if the the list too long
-    @GetMapping("manage_bus/page/{pageNo}")
-	public String findPaginated(@PathVariable (value = "pageNo") int pageNo, 
-			@RequestParam("sortField") String sortField,
-			@RequestParam("sortDir") String sortDir,
-			Model model) {
-		int pageSize = 5;
-		
-		Page<Bus> page = busService.findPaginated(pageNo, pageSize, sortField, sortDir);
-		List<Bus> listBus = page.getContent();
-		
-		model.addAttribute("currentPage", pageNo);
-		model.addAttribute("totalPages", page.getTotalPages());
-		model.addAttribute("totalItems", page.getTotalElements());
-		
-		model.addAttribute("sortField", sortField);
-		model.addAttribute("sortDir", sortDir);
-		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
-		
-		model.addAttribute("listBus", listBus);
-		return "manage_bus";
-	}
+
 }

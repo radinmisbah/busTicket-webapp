@@ -12,9 +12,9 @@
 	<div class="container">
 		<h1>Bus Management System</h1>
 		<hr>
-		<h2>Add New Bus Service</h2>
+		<h2>Find Bus To Your Destination</h2>
 
-		<form action="#" th:action="@{/searchBus}" method="get">
+		<form action="#" th:action="@{/user/searchBus}" method="get">
 				<input type="text" name="departure"
 				placeholder="Depart From" class="form-control mb-4 col-4">
 				
@@ -33,8 +33,8 @@
 		
 		<hr>
 
-		
-		<a th:href = "@{/viewManageBus}"> Back to Bus Service List</a>
+		<a th:href="@{/logout}" class="btn btn-primary btn-sm mb-3" >Logout</a>
+		<a th:href = "@{/admin/viewManageBus}"> Back to Bus Service List</a>
 	</div>
 </body>
 </html>

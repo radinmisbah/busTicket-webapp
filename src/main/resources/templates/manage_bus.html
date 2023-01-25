@@ -40,34 +40,34 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
 	<h1>Bus List</h1>
 	
 	<a th:href = "@{/showAddBusForm}" class="btn btn-primary btn-sm mb-3"> Add New Bus Service </a>
-	<a th:href = "@{/showSearchBusForm}" class="btn btn-primary btn-sm mb-3"> Search Bus </a>
+	<a th:href = "@{/user/showSearchBusForm}" class="btn btn-primary btn-sm mb-3"> Search Bus </a>
 	<a th:href="@{/logout}" class="btn btn-primary btn-sm mb-3" >Logout</a>
 
 		<table border="1" class = "table table-striped table-responsive-md">
 			<thead>
 				<tr>
 					<th>
-						<a th:href="@{'/manage_bus/page/' + ${currentPage} + '?sortField=busName&sortDir=' + ${reverseSortDir}}">
+						<a th:href="@{'//admin/manage_bus/page/' + ${currentPage} + '?sortField=busName&sortDir=' + ${reverseSortDir}}">
 							Bus Name</a>
 					</th>
 					<th>
-					<a th:href="@{'/manage_bus/page/' + ${currentPage} + '?sortField=departure&sortDir=' + ${reverseSortDir}}">
+					<a th:href="@{'//admin/manage_bus/page/' + ${currentPage} + '?sortField=departure&sortDir=' + ${reverseSortDir}}">
 							Departure </a>
 					</th>
 					<th>
-					<a th:href="@{'/manage_bus/page/' + ${currentPage} + '?sortField=arrival&sortDir=' + ${reverseSortDir}}">
+					<a th:href="@{'//admin/manage_bus/page/' + ${currentPage} + '?sortField=arrival&sortDir=' + ${reverseSortDir}}">
 							Destination </a>
 					</th>
                     <th>
-                    <a th:href="@{'/manage_bus/page/' + ${currentPage} + '?sortField=departureTime&sortDir=' + ${reverseSortDir}}">
+                    <a th:href="@{'//admin/manage_bus/page/' + ${currentPage} + '?sortField=departureTime&sortDir=' + ${reverseSortDir}}">
                         Departure Time</a>
                     </th>
                     <th>
-                <a th:href="@{'/manage_bus/page/' + ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir}}">
+                <a th:href="@{'//admin/manage_bus/page/' + ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir}}">
                     Price</a>
                 </th>
                 <th>
-                <a th:href="@{'/manage_bus/page/' + ${currentPage} + '?sortField=maxSeat&sortDir=' + ${reverseSortDir}}">
+                <a th:href="@{'//admin/manage_bus/page/' + ${currentPage} + '?sortField=maxSeat&sortDir=' + ${reverseSortDir}}">
                     Available Seat</a>
                 </th>
 
@@ -100,17 +100,17 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
 				</div>
 				<div class = "col-sm-1">
 					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
-						<a th:if="${currentPage != i}" th:href="@{'/manage_bus/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<a th:if="${currentPage != i}" th:href="@{'//admin/manage_bus/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
 						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
 					</span>
 				</div>
 				<div class = "col-sm-1">
-					<a th:if="${currentPage < totalPages}" th:href="@{'/manage_bus/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+					<a th:if="${currentPage < totalPages}" th:href="@{'//admin/manage_bus/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
 					<span th:unless="${currentPage < totalPages}">Next</span>
 				</div>
 				
 				 <div class="col-sm-1">
-    				<a th:if="${currentPage < totalPages}" th:href="@{'/manage_bus/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+    				<a th:if="${currentPage < totalPages}" th:href="@{'//admin/manage_bus/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
 					<span th:unless="${currentPage < totalPages}">Last</span>
    				 </div>
 			</div>
