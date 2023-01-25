@@ -1,37 +1,121 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Registration</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
-integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+	<meta charset="ISO-8859-1">
+	<title>Registration</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
+		integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-	 integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+	 	integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+	</script>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+	<style type="text/css">
+		.background {
+			background-color: #f2f2f2;
+		}
+		.form-container {
+			background-color: #FFFFFF;;
+			min-height: 520px;
+			min-width: 800px;
+			border-radius: 10px;
+			backdrop-filter: blur(10px);
+			border: 2px solid rgba(255,255,255,0.1);
+			/* box-shadow: 0 0 40px rgba(8,7,16,0.6); */
+			padding: 50px 35px;
+			box-shadow:0 5px 10px 0 rgba(0,0,0,.1);
+			-moz-box-shadow:0 5px 10px 0 rgba(0,0,0,.1);
+			-webkit-box-shadow:0 5px 10px 0 rgba(0,0,0,.1);-o-box-shadow:0 5px 10px 0 rgba(0,0,0,.1);
+			-ms-box-shadow:0 5px 10px 0 rgba(0,0,0,.1)
+		}
+
+		.form-container *{
+			font-family: 'Poppins',sans-serif;
+			color: #333;
+			letter-spacing: 0.5px;
+			outline: none;
+			border: none;
+		}
+
+		.form-container h3{
+			font-size: 32px;
+			font-weight: 500;
+			line-height: 42px;
+			text-align: center;
+			padding-bottom: 5px;
+		}
+
+		.form-container label{
+			display: block;
+			margin-top: 30px;
+			font-size: 16px;
+			font-weight: 500;
+		}
+		.form-container input{
+			display: block;
+			height: 50px;
+			width: 100%;
+			background-color: #eee;
+			border-radius: 3px;
+			padding: 0 10px;
+			margin-top: 8px;
+			font-size: 14px;
+			font-weight: 300;
+		}
+
+		.form-container button{
+			margin-top: 50px;
+			width: 100%;
+			background-color: #FF4B2B;
+			color: #FFFFFF;
+			padding: 15px 0;
+			font-size: 18px;
+			font-weight: 600;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+
+		.input-container {
+			width: 50%;
+			padding-left: 0.75rem; /* 12px */
+			padding-right: 0.75rem; /* 12px */
+		}
+
+		.register-link {
+			margin-top: 30px;
+		}
+
+		.register-link a {
+			text-decoration: none;
+  			color: #0074D9;
+			position: relative;
+		}
+
+		.register-link a::before{
+			content: '';
+			position: absolute;
+			bottom: 0;
+			right: 0;
+			width: 0;
+			height: 2px;
+			background-color: #0074D9;
+			transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+			}
+
+		@media (hover: hover) and (pointer: fine) {
+			.register-link a:hover::before{
+				left: 0;
+				right: auto;
+				width: 100%;
+			}
+		}
+	</style>
 </head>
 <body>
-
-	<!-- create navigation bar ( header) -->
-	<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="#" th:href="@{/}">Employee Management System</a>
-			</div>
-		</div>
-	</nav>
-
-<br>
-<br>
 	<!-- Create HTML registration form -->
-	<div class="container">
-		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
+	<div class="background min-vw-100 min-vh-100 d-flex flex-column justify-content-center align-items-center">
+		<div class="form-container">
+
+				<h3>Registration</h3>
 
 				<!-- success message -->
 				<div th:if="${param.success}">
@@ -39,45 +123,68 @@ integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6
 						to our awesome app!</div>
 				</div>
 
-				<h1>Registration</h1>
-
 				<form th:action="@{/registration}" method="post" th:object="${user}">
-					<div class="form-group">
-						<label class="control-label" for="firstName"> First Name </label>
-						<input id="firstName" class="form-control" th:field="*{firstName}"
-							required autofocus="autofocus" />
+					<div class="d-flex">
+						<div class="input-container">
+							<label for="firstName">First Name</label>
+							<input 
+								id="firstName" 
+								type="text" 
+								th:field="*{firstName}"
+								required 
+								autofocus="autofocus" />
+						</div>	
+	
+						<div class="input-container">
+							<label for="lastName">Last Name</label> 
+							<input
+								id="lastName" 
+								type="text"
+								th:field="*{lastName}"
+								required 
+								autofocus="autofocus" />
+						</div>
 					</div>
 
-					<div class="form-group">
-						<label class="control-label" for="lastName"> Last Name </label> <input
-							id="lastName" class="form-control" th:field="*{lastName}"
-							required autofocus="autofocus" />
+					<div class="d-flex">
+						<div class="input-container">
+							<label for="email">Email</label> 
+							<input
+								id="email" 
+								type="email"
+								th:field="*{email}" 
+								required
+								autofocus="autofocus" />
+						</div>
+	
+						<div class="input-container">
+							<label for="mobileNumber">Phone Number</label> 
+							<input
+								id="mobileNumber"
+								type="tel"
+								th:field="*{mobileNumber}" required
+								autofocus="autofocus" />
+						</div>
 					</div>
 
-					<div class="form-group">
-						<label class="control-label" for="email"> Email </label> <input
-							id="email" class="form-control" th:field="*{email}" required
-							autofocus="autofocus" />
+					<div class="d-flex">	
+						<div class="input-container">
+							<label for="password">Password</label> 
+							<input
+								id="password" 
+								type="password"
+								th:field="*{password}" 
+								required 
+								autofocus="autofocus" />
+						</div>
 					</div>
 
-					<div class="form-group">
-						<label class="control-label" for="mobileNumber"> Phone Number </label> <input
-							id="mobileNumber" class="form-control" th:field="*{mobileNumber}" required
-							autofocus="autofocus" />
-					</div>
-
-					<div class="form-group">
-						<label class="control-label" for="password"> Password </label> <input
-							id="password" class="form-control" type="password"
-							th:field="*{password}" required autofocus="autofocus" />
-					</div>
-
-					<div class="form-group">
-						<button type="submit" class="btn btn-success">Register</button>
-						<span>Already registered? <a href="/" th:href="@{/login}">Login
-								here</a></span>
-					</div>
+					<button type="submit">Register</button>
 				</form>
+
+				<div class="register-link">
+					<span>Already registered? <a th:href="@{/login}">Login here</a></span>
+				</div>
 			</div>
 		</div>
 	</div>
