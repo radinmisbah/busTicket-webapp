@@ -20,10 +20,6 @@ public class SoldTicket {
 	}
 	
 	
-	public SoldTicket(int seatNumber, Date departureDate) {
-        this.seatNumber = seatNumber;
-        this.departureDate = departureDate;
-    }
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,8 +30,7 @@ public class SoldTicket {
 	@Column(name = "seatNumber")
 	private int seatNumber;
 
-	@Column(name = "departureDate")
-	private Date departureDate;
+	
 
 	@Column(name = "purchasedTime")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -59,13 +54,7 @@ public class SoldTicket {
 		this.seatNumber = seatNumber;
 	}
 
-	public Date getDepartureDate() {
-		return departureDate;
-	}
-
-	public void setDepartureDate(Date departureDate) {
-		this.departureDate = departureDate;
-	}
+	
 
 	public Date getPurchasedTime() {
 		return purchasedTime;

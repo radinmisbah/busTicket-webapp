@@ -2,6 +2,7 @@ package net.javaguides.springboot.model;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -47,6 +48,9 @@ public class Trip {
 	
 	@Column(name = "departureTime")
 	private  LocalTime departureTime;
+
+    @Column(name = "departureDate")
+	private Date departureDate;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "trip_ID", referencedColumnName = "trip_ID")
@@ -119,6 +123,14 @@ public class Trip {
     public void setDepartureTime(LocalTime departureTime) {
         this.departureTime = departureTime;
     }
+
+    public Date getDepartureDate() {
+		return departureDate;
+	}
+
+	public void setDepartureDate(Date departureDate) {
+		this.departureDate = departureDate;
+	}
 
     
 
