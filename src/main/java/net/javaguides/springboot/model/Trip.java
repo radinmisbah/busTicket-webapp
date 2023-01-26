@@ -2,6 +2,7 @@ package net.javaguides.springboot.model;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -26,17 +27,22 @@ public class Trip {
     
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "bus_ID")
+	@Column(name = "trip_ID")
 	private Long id;
 
-    @Column(name = "busName")
-	private String busName;
 	
+
 	@Column(name = "departure")
 	private String departure;
 	
 	@Column(name = "arrival")
 	private String arrival;
+
+    @Column(name = "departureDate")
+	private  Date departureDate;
+
+    @Column(name = "departureTime")
+	private  LocalTime departureTime;
 	
 	@Column(name = "maxSeat")
 	private int maxSeat;
@@ -44,19 +50,18 @@ public class Trip {
 	@Column(name = "price")
     @NumberFormat(pattern = "#,###.00")
 	private float price;
-	
-	@Column(name = "departureTime")
-	private  LocalTime departureTime;
 
+    @Column(name = "status")
+	private String status;
+	
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "bus_ID", referencedColumnName = "bus_ID")
+    @JoinColumn(name = "trip_ID", referencedColumnName = "trip_ID")
     private List<Booking> Bookings = new ArrayList<>();
 
     public Trip(){
 
     }
-    public Trip(String busName, String departure, String arrival, int maxSeat, float price, LocalTime departureTime) {
-        this.busName = busName;
+    public Trip(String departure, String arrival, int maxSeat, float price, LocalTime departureTime) {
         this.departure = departure;
         this.arrival = arrival;
         this.maxSeat = maxSeat;
@@ -72,13 +77,6 @@ public class Trip {
         this.id = id;
     }
 
-    public String getBusName() {
-        return busName;
-    }
-
-    public void setBusName(String busName) {
-        this.busName = busName;
-    }
 
     public String getDeparture() {
         return departure;
@@ -118,6 +116,24 @@ public class Trip {
 
     public void setDepartureTime(LocalTime departureTime) {
         this.departureTime = departureTime;
+    }
+    public Date getDepartureDate() {
+        return departureDate;
+    }
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
+    }
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    public List<Booking> getBookings() {
+        return Bookings;
+    }
+    public void setBookings(List<Booking> bookings) {
+        Bookings = bookings;
     }
 
     
