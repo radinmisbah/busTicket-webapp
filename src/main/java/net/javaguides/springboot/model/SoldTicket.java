@@ -13,7 +13,7 @@ import javax.persistence.TemporalType;
 
 
 @Entity
-@Table(name = "sold_ticket")
+@Table(name = "bookings")
 public class SoldTicket {
 
 	public SoldTicket() {

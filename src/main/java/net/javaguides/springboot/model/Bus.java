@@ -1,125 +1,63 @@
 package net.javaguides.springboot.model;
 
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.format.annotation.NumberFormat;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
 @Entity
-@Table(name = "Bus")
-@JsonIdentityInfo(generator=ObjectIdGenerators.PropertyGenerator.class, property="id")
+@Table(name = "buses")
 public class Bus {
-    
-    @Id
+
+	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "bus_ID")
 	private Long id;
 
-    @Column(name = "busName")
-	private String busName;
 	
-	@Column(name = "departure")
-	private String departure;
-	
-	@Column(name = "arrival")
-	private String arrival;
-	
-	@Column(name = "maxSeat")
-	private int maxSeat;
-	
-	@Column(name = "price")
-    @NumberFormat(pattern = "#,###.00")
-	private float price;
-	
-	@Column(name = "departureTime")
-	private  LocalTime departureTime;
+	@Column(name = "reg_number")
+	private String regNumber;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "bus_ID", referencedColumnName = "bus_ID")
-    private List<SoldTicket> soldTickets = new ArrayList<>();
+	@Column(name = "driver_name")
+	private String driverName;
 
-    public Bus(){
+    @ManyToOne
+	@JoinColumn(name = "company_id", nullable = false)
+    Company company;
 
+    public Bus() {
+	}
+	
+	public Bus(String regNumber, String driverName) {
+        this.regNumber = regNumber;
+        this.driverName = driverName;
     }
-    public Bus(String busName, String departure, String arrival, int maxSeat, float price, LocalTime departureTime) {
-        this.busName = busName;
-        this.departure = departure;
-        this.arrival = arrival;
-        this.maxSeat = maxSeat;
-        this.price = price;
-        this.departureTime = departureTime;
-    }
-
+	
     public Long getId() {
-        return id;
-    }
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public String getBusName() {
-        return busName;
-    }
+	public String getRegNumber() {
+		return regNumber;
+	}
 
-    public void setBusName(String busName) {
-        this.busName = busName;
-    }
+	public void setRegNumber(String regNumber) {
+		this.regNumber = regNumber;
+	}
 
-    public String getDeparture() {
-        return departure;
-    }
+	public String getDriverName() {
+		return driverName;
+	}
 
-    public void setDeparture(String departure) {
-        this.departure = departure;
-    }
-
-    public String getArrival() {
-        return arrival;
-    }
-
-    public void setArrival(String arrival) {
-        this.arrival = arrival;
-    }
-
-    public int getMaxSeat() {
-        return maxSeat;
-    }
-
-    public void setMaxSeat(int maxSeat) {
-        this.maxSeat = maxSeat;
-    }
-
-    public float getPrice() {
-        return price;
-    }
-
-    public void setPrice(float price) {
-        this.price = price;
-    }
-
-    public LocalTime getDepartureTime() {
-        return departureTime;
-    }
-
-    public void setDepartureTime(LocalTime departureTime) {
-        this.departureTime = departureTime;
-    }
-
-    
-
+	public void setDriverName(String driverName) {
+		this.driverName = driverName;
+	}
 }
+
