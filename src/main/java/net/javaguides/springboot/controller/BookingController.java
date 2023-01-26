@@ -7,39 +7,39 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import net.javaguides.springboot.model.SoldTicket;
-import net.javaguides.springboot.service.SoldTicketService;
+import net.javaguides.springboot.model.Booking;
+import net.javaguides.springboot.service.BookingService;
 
 
 
 @Controller
-public class SoldTicketController {
+public class BookingController {
 
     @Autowired
-    private SoldTicketService soldTicketService;
+    private BookingService BookingService;
     
     //display list of sold ticket
     @GetMapping("/view")
     public String viewHomePage (Model model){
             
         
-        model.addAttribute("listSoldTicket", soldTicketService.getAllSoldTicket());
+        model.addAttribute("listBooking", BookingService.getAllBooking());
         return "index";
     }
 
     @GetMapping("/showNewTicketForm")
     public String showNewTicketForm(Model model){
         //create model attrobute to bind form data
-        SoldTicket soldTicket = new SoldTicket();
-        model.addAttribute("soldTicket", soldTicket);
+        Booking Booking = new Booking();
+        model.addAttribute("Booking", Booking);
         return "new_ticket";
 
     }
 
     @PostMapping("/saveTicket")
-    public String saveTicket(@ModelAttribute("soldTicket") SoldTicket soldTicket){
+    public String saveTicket(@ModelAttribute("Booking") Booking Booking){
         //save ticket to database
-        soldTicketService.saveTicket(soldTicket);
+        BookingService.saveTicket(Booking);
         return "redirect:/";
     }
 

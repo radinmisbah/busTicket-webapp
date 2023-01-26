@@ -14,13 +14,13 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "bookings")
-public class SoldTicket {
+public class Booking {
 
-	public SoldTicket() {
+	public Booking() {
 	}
 	
 	
-	public SoldTicket(int seatNumber, Date departureDate) {
+	public Booking(int seatNumber, Date departureDate) {
         this.seatNumber = seatNumber;
         this.departureDate = departureDate;
     }

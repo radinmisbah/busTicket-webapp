@@ -50,7 +50,7 @@ public class Trip {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "bus_ID", referencedColumnName = "bus_ID")
-    private List<SoldTicket> soldTickets = new ArrayList<>();
+    private List<Booking> Bookings = new ArrayList<>();
 
     public Trip(){
 
