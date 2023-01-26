@@ -20,27 +20,28 @@ public class Booking {
 	}
 	
 	
-	public Booking(int seatNumber, Date departureDate) {
+	public Booking(int seatNumber) {
         this.seatNumber = seatNumber;
-        this.departureDate = departureDate;
     }
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ticket_ID")
+	@Column(name = "booking_ID")
 	private Long id;
 
 	
 	@Column(name = "seatNumber")
 	private int seatNumber;
 
-	@Column(name = "departureDate")
-	private Date departureDate;
-
-	@Column(name = "purchasedTime")
+	@Column(name = "purchased_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date purchasedTime;
 
+	@Column(name = "status")
+	private String status;
+
+	@Column(name = "final_price")
+	private float finalPrice;
 	
     public Long getId() {
 		return id;
@@ -59,13 +60,6 @@ public class Booking {
 		this.seatNumber = seatNumber;
 	}
 
-	public Date getDepartureDate() {
-		return departureDate;
-	}
-
-	public void setDepartureDate(Date departureDate) {
-		this.departureDate = departureDate;
-	}
 
 	public Date getPurchasedTime() {
 		return purchasedTime;
@@ -73,6 +67,26 @@ public class Booking {
 
 	public void setPurchasedTime(Date purchasedTime) {
 		this.purchasedTime = purchasedTime;
+	}
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+	public float getFinalPrice() {
+		return finalPrice;
+	}
+
+
+	public void setFinalPrice(float finalPrice) {
+		this.finalPrice = finalPrice;
 	}
 
 
