@@ -52,6 +52,9 @@ public class Trip {
     @Column(name = "departureDate")
 	private Date departureDate;
 
+    @Column(name = "tripStatus")
+	private String tripStatus;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "trip_ID", referencedColumnName = "trip_ID")
     private List<SoldTicket> soldTickets = new ArrayList<>();
@@ -131,6 +134,18 @@ public class Trip {
 	public void setDepartureDate(Date departureDate) {
 		this.departureDate = departureDate;
 	}
+    public String getTripStatus() {
+        return tripStatus;
+    }
+    public void setTripStatus(String tripStatus) {
+        this.tripStatus = tripStatus;
+    }
+    public List<SoldTicket> getSoldTickets() {
+        return soldTickets;
+    }
+    public void setSoldTickets(List<SoldTicket> soldTickets) {
+        this.soldTickets = soldTickets;
+    }
 
     
 
