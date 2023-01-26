@@ -5,6 +5,13 @@
             "name": "Launch BusTicketWebappApplication",
             "request": "launch",
             "mainClass": "net.javaguides.springboot.BusTicketWebappApplication",
+            "projectName": "busticket-webapp"
+        },
+        {
+            "type": "java",
+            "name": "Launch BusTicketWebappApplication",
+            "request": "launch",
+            "mainClass": "net.javaguides.springboot.BusTicketWebappApplication",
             "projectName": "employee-management-webapp"
         },
         {

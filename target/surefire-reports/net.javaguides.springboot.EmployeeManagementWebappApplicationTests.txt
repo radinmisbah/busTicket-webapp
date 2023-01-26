@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: net.javaguides.springboot.EmployeeManagementWebappApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 51.215 s - in net.javaguides.springboot.EmployeeManagementWebappApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.272 s - in net.javaguides.springboot.EmployeeManagementWebappApplicationTests
