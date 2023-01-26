@@ -11,6 +11,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.NumberFormat;
+
 
 @Entity
 @Table(name = "bookings")
@@ -35,6 +37,13 @@ public class SoldTicket {
 	@Column(name = "purchasedTime")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date purchasedTime;
+
+	@Column(name = "bookingStatus")
+	private String bookingStatus;
+
+	@Column(name = "finalPrice")
+	@NumberFormat(pattern = "#,###.00")
+	private float finalPrice;
 
 	
     public Long getId() {
@@ -62,6 +71,14 @@ public class SoldTicket {
 
 	public void setPurchasedTime(Date purchasedTime) {
 		this.purchasedTime = purchasedTime;
+	}
+
+	public String getBookingStatus() {
+		return bookingStatus;
+	}
+
+	public void setBookingStatus(String bookingStatus) {
+		this.bookingStatus = bookingStatus;
 	}
 
 
