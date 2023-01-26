@@ -24,7 +24,7 @@ public class MainController {
         if (userService.getCurrentUser().getRole().equals("ROLE_ADMIN")) {
             return "redirect:/admin/viewManageBus";
         } else if (userService.getCurrentUser().getRole().equals("ROLE_USER")) {
-            return "redirect:/user/showSearchBusForm";
+            return "redirect:/user/mainSearchTrip";
         }
         return "redirect:/";
     }
