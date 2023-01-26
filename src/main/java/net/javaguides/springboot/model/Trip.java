@@ -26,7 +26,7 @@ public class Trip {
     
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "bus_ID")
+	@Column(name = "trip_ID")
 	private Long id;
 
     @Column(name = "busName")
@@ -49,7 +49,7 @@ public class Trip {
 	private  LocalTime departureTime;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "bus_ID", referencedColumnName = "bus_ID")
+    @JoinColumn(name = "trip_ID", referencedColumnName = "trip_ID")
     private List<SoldTicket> soldTickets = new ArrayList<>();
 
     public Trip(){
