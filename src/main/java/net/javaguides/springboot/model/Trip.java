@@ -51,8 +51,8 @@ public class Trip {
     @NumberFormat(pattern = "#,###.00")
 	private float price;
 
-    @Column(name = "status")
-	private String status;
+    @Column(name = "tripStatus")
+	private String tripStatus;
 	
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "trip_ID", referencedColumnName = "trip_ID")
@@ -123,17 +123,19 @@ public class Trip {
     public void setDepartureDate(Date departureDate) {
         this.departureDate = departureDate;
     }
-    public String getStatus() {
-        return status;
-    }
-    public void setStatus(String status) {
-        this.status = status;
-    }
+  
+
     public List<Booking> getBookings() {
         return Bookings;
     }
     public void setBookings(List<Booking> bookings) {
         Bookings = bookings;
+    }
+    public String getTripStatus() {
+        return tripStatus;
+    }
+    public void setTripStatus(String tripStatus) {
+        this.tripStatus = tripStatus;
     }
 
     

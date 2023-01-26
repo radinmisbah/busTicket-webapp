@@ -37,8 +37,8 @@ public class Booking {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date purchasedTime;
 
-	@Column(name = "status")
-	private String status;
+	@Column(name = "bookingStatus")
+	private String bookingStatus;
 
 	@Column(name = "final_price")
 	private float finalPrice;
@@ -70,14 +70,7 @@ public class Booking {
 	}
 
 
-	public String getStatus() {
-		return status;
-	}
 
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
 
 
 	public float getFinalPrice() {
@@ -87,6 +80,16 @@ public class Booking {
 
 	public void setFinalPrice(float finalPrice) {
 		this.finalPrice = finalPrice;
+	}
+
+
+	public String getBookingStatus() {
+		return bookingStatus;
+	}
+
+
+	public void setBookingStatus(String bookingStatus) {
+		this.bookingStatus = bookingStatus;
 	}
 
 
