@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="ISO-8859-1">
-	<title>Registration</title>
+	<title>Search Trip</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
 		integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
@@ -124,24 +124,24 @@
 						to our awesome app!</div>
 				</div>-->
 
-				<form th:action="@{/registration}" method="post" th:object="${user}">
+				<form th:action="@{/user/viewTripList}" method="get" th:object="${trip}">
 					<div class="d-flex">
 						<div class="input-container">
-							<label for="firstName">From</label>
+							<label for="departure">From</label>
 							<input 
-								id="firstName" 
+								id="departure" 
 								type="text" 
-								th:field="*{firstName}"
+								th:field="*{departure}"
 								required 
 								autofocus="autofocus" />
 						</div>	
 	
 						<div class="input-container">
-							<label for="lastName">To </label> 
+							<label for="arrival">To </label> 
 							<input
-								id="lastName" 
+								id="arrival" 
 								type="text"
-								th:field="*{lastName}"
+								th:field="*{arrival}"
 								required 
 								autofocus="autofocus" />
 						</div>
@@ -149,25 +149,18 @@
 
 					<div class="d-flex">	
 						<div class="input-container" style="width: 100%;">
-							<label for="password">Password</label> 
+							<label for="departureDate">Departure Date</label> 
 							<input
-								id="password" 
-								type="password"
-								th:field="*{password}" 
+								id="departureDate" 
+								type="date"
+								th:field="*{departureDate}" 
 								required 
 								autofocus="autofocus" />
 						</div>
-						<label for="departureDate" >Departure Date</label>
-						<input type="date" 
-						name = "departureDate" class="form-control mb-4 col-4">
 					</div>
 
 					<button type="submit">Search Buses</button>
 				</form>
-
-				<div class="register-link">
-					<span>Already registered? <a th:href="@{/login}">Login here</a></span>
-				</div>
 			</div>
 		</div>
 	</div>
