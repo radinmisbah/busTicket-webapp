@@ -36,9 +36,9 @@ public class PassengerController {
     //controller mapping for user page	
 	@GetMapping("/user/viewTripList")
 	public String searchTicket(Model model, @RequestParam("departure") String departure, @RequestParam("arrival") String arrival, @RequestParam("departureDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date departureDate) {
-		List<Trip> buses = tripService.searchBus(departure, arrival);
-		model.addAttribute("buses", buses);
-		//departureDate is used for filtering availability
+		List<Trip> tripList = tripService.searchTrip(departure, arrival,departureDate);
+		model.addAttribute("tripList", tripList);
+		
 		return "view_trip_list";
 	}
 

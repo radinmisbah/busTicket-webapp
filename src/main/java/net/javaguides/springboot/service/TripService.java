@@ -1,5 +1,6 @@
 package net.javaguides.springboot.service;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.data.domain.Page;
 import net.javaguides.springboot.model.Trip;
@@ -11,4 +12,5 @@ public interface TripService {
     public void deleteBusById(long id);
     public Trip getBusById(long id);
     public List<Trip> searchBus(String departure, String destination);
+    public List<Trip> searchTrip(String departure, String destination, Date departureDate);
 }

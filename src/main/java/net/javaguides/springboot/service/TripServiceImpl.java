@@ -1,5 +1,6 @@
 package net.javaguides.springboot.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
@@ -54,6 +55,12 @@ public class TripServiceImpl implements TripService {
 		
 		Pageable pageable = PageRequest.of(pageNo - 1, pageSize, sort);
 		return this.tripRepo.findAll(pageable);
+	}
+
+	@Override
+	public List<Trip> searchTrip(String departure, String destination, Date departureDate) {
+		
+		return tripRepo.findByDepartureAndArrivalAndDepartureDate(departure,destination,departureDate);
 	}    
 }
 
