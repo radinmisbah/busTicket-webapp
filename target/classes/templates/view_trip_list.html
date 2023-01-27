@@ -17,7 +17,7 @@
 			font-family: 'Poppins',sans-serif;
 		}
 		.navbar-container {
-			background-color: #ff5c3f;
+			background-color: #1e90ff;
 		}
 
 		.navbar-container .navbar-brand{
@@ -49,40 +49,14 @@
 			
 			<div class=" collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav ms-auto ">
+				
 				<li class="nav-item dropdown">
 					<a class="nav-link mx-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						Manage Company
+						Manage Booking
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<li><a class="dropdown-item" th:href="@{/admin/companies}">All companies</a></li>
-						<li><a class="dropdown-item" th:href="@{/admin/companies?register}">Register new company</a></li>
-					</ul>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link mx-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						Manage Bus
-					</a>
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<li><a class="dropdown-item" href="#">All buses</a></li>
-						<li><a class="dropdown-item" href="#">Register new bus</a></li>
-					</ul>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link mx-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						Manage Trip
-					</a>
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<li><a class="dropdown-item" th:href="@{/admin/viewManageBus}">All trips</a></li>
-						<li><a class="dropdown-item" th:href = "@{/showAddBusForm}">Register new trip</a></li>
-					</ul>
-				</li>
-				<li class="nav-item dropdown">
-					<a class="nav-link mx-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						Manage Administrator
-					</a>
-					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<li><a class="dropdown-item" href="#">All administrators</a></li>
-						<li><a class="dropdown-item" href="#">Register new administrator</a></li>
+						<li><a class="dropdown-item" href="#">My Booking</a></li>
+						<li><a class="dropdown-item" href="#">Booking History</a></li>
 					</ul>
 				</li>
 				<li class="nav-item">
