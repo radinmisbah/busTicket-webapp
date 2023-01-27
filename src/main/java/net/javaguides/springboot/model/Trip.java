@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -58,6 +59,16 @@ public class Trip {
     @JoinColumn(name = "trip_ID", referencedColumnName = "trip_ID")
     private List<Booking> Bookings = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "bus_id")
+    private Bus bus;
+
+    public Bus getBus() {
+        return bus;
+    }
+    public void setBus(Bus bus) {
+        this.bus = bus;
+    }
     public Trip(){
 
     }
@@ -125,12 +136,7 @@ public class Trip {
     }
   
 
-    public List<Booking> getBookings() {
-        return Bookings;
-    }
-    public void setBookings(List<Booking> bookings) {
-        Bookings = bookings;
-    }
+
     public String getTripStatus() {
         return tripStatus;
     }

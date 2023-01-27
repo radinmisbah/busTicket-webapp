@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,6 +44,10 @@ public class Booking {
 
 	@Column(name = "final_price")
 	private float finalPrice;
+
+	@ManyToOne
+    @JoinColumn(name = "trip_id")
+    private Trip trip;
 	
     public Long getId() {
 		return id;
@@ -90,6 +96,16 @@ public class Booking {
 
 	public void setBookingStatus(String bookingStatus) {
 		this.bookingStatus = bookingStatus;
+	}
+
+
+	public Trip getTrip() {
+		return trip;
+	}
+
+
+	public void setTrip(Trip trip) {
+		this.trip = trip;
 	}
 
 

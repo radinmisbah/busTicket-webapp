@@ -126,14 +126,13 @@
 			</thead>
 			<tbody>
 				<tr th:each="trip : ${tripList}">
-					<td th:text="${trip.busName}"></td>
+					<td th:text="${trip.bus.company.name}"></td>
 					<td th:text="${trip.departure}"></td>
 					<td th:text="${trip.arrival}"></td>
                     <td th:text="${trip.departureTime}"></td>
-					<td th:text="${bus.price}"></td>
-					<td th:text="${bus.maxSeat}"></td>
+					<td >RM <span th:text="${trip.price}"></span></td>
                    
-                        <td> <a th:href="@{/showBusUpdateForm/{id}(id=${bus.id})}" class="btn btn-primary">Booking</a>
+                       <!--<td> <a th:href="@{/showBusUpdateForm/{id}(id=${bus.id})}" class="btn btn-primary">Booking</a>-->
 					</td>
 
                    
