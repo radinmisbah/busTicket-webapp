@@ -48,8 +48,22 @@ public class Booking {
 	@ManyToOne
     @JoinColumn(name = "trip_id")
     private Trip trip;
+
+	@ManyToOne
+    @JoinColumn(name = "purchased_by")
+    private User user;
 	
-    public Long getId() {
+    public User getUser() {
+		return user;
+	}
+
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+
+	public Long getId() {
 		return id;
 	}
 

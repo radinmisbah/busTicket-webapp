@@ -40,9 +40,12 @@ public class BookingController {
     }
 
     @PostMapping("/user/saveTicket")
-    public String saveTicket(@ModelAttribute("Booking") Booking Booking){
+    public String saveTicket(@ModelAttribute("booking") Booking booking){
+
+        booking.setFinalPrice(booking.getTrip().getPrice());
+        booking.setBookingStatus("Paid");
         //save ticket to database
-        BookingService.saveTicket(Booking);
+        BookingService.saveTicket(booking);
         return "redirect:/";
     }
 

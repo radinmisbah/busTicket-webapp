@@ -116,10 +116,12 @@
 	<div class="background min-vw-100 min-vh-100 d-flex flex-column justify-content-center align-items-center">
 		<div class="form-container">
 
-				<h3>Choose Your Seat</h3>
+				<h3>Ticket Confirmation</h3>
 
 		
-				<form th:action="@{/user/viewTripList}" method="get" th:object="${booking}">
+				<form th:action="@{/user/saveTicket}" method="post" th:object="${booking}">
+					<input type="hidden" th:field="*{trip.id}" th:value="${booking.trip.id}"/>
+					<input type="hidden" th:field="*{user.id}" th:value="${booking.user.id}"/>
 					<div class="d-flex">
 						<div class="input-container">
 							<label> Bus Name :</label>

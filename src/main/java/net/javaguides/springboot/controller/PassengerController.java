@@ -23,12 +23,16 @@ import net.javaguides.springboot.model.Booking;
 import net.javaguides.springboot.model.Trip;
 import net.javaguides.springboot.model.User;
 import net.javaguides.springboot.service.TripService;
+import net.javaguides.springboot.service.UserService;
 
 @Controller
 public class PassengerController {
 
     @Autowired
     private TripService tripService;
+
+	@Autowired
+	private UserService userService;
 
     @PreAuthorize("hasRole('ROLE_USER')")
     //redirect to form to search new bus
@@ -59,10 +63,14 @@ public class PassengerController {
 		
 		// get trip from the service
 		Trip trip = tripService.getBusById(id);
+
+		//get current user
+		User currentUser = userService.getCurrentUser();
 		
 		//create Booking
 		Booking booking = new Booking();
 		booking.setTrip(trip);
+		booking.setUser(currentUser);
 
 		//generate seat number
 		ArrayList<Integer> seatNum = new ArrayList<Integer>();
