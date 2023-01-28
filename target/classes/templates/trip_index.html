@@ -246,7 +246,7 @@
                                             <input 
                                                 name="departureDate" 
                                                 type="date" 
-                                                th:value="*{departureDate}"
+                                                th:value="*{#dates.format(departureDate, 'yyyy-MM-dd')}"
                                                 required 
                                                 autofocus="autofocus" />
                                         </div>
