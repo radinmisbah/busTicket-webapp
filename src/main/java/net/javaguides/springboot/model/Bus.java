@@ -85,10 +85,5 @@ public class Bus {
 	public void setTrips(List<Trip> trips) {
 		this.trips = trips;
 	}
-
-	//@OneToMany(cascade = CascadeType.ALL)
-    //@JoinColumn(name = "bus_ID", referencedColumnName = "bus_ID")
-    //private List<Trip> trips = new ArrayList<>();
-	
 }
 

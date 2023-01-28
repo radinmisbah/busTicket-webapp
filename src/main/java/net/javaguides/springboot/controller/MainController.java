@@ -28,11 +28,4 @@ public class MainController {
         }
         return "redirect:/";
     }
-/*
- * @GetMapping("/") public String home() { return "index"; }
- */
-
- 
- 
-	 
 }

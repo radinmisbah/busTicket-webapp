@@ -4,7 +4,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,10 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -33,8 +29,6 @@ public class Trip {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "trip_ID")
 	private Long id;
-
-	
 
 	@Column(name = "departure")
 	private String departure;
@@ -132,22 +126,20 @@ public class Trip {
     public void setDepartureTime(LocalTime departureTime) {
         this.departureTime = departureTime;
     }
+
     public Date getDepartureDate() {
         return departureDate;
     }
+
     public void setDepartureDate(Date departureDate) {
         this.departureDate = departureDate;
     }
-  
-
 
     public String getTripStatus() {
         return tripStatus;
     }
+    
     public void setTripStatus(String tripStatus) {
         this.tripStatus = tripStatus;
     }
-
-    
-
 }
