@@ -65,26 +65,16 @@ public class TripServiceImpl implements TripService {
 	public List<Trip> searchTrip(String departure, String arrival, Date departureDate) {
 
 		List<Trip> trips = tripRepo.findAllByDepartureDate(departureDate);
-
-		//List<Trip> filteredTrips = trips.stream()
-         //       .filter(t -> t.getDeparture().equalsIgnoreCase(departure) && t.getArrival().IgnoreCase(arrival))
-         //       .collect(Collectors.toList());
-	    
-				//CollectionUtils.filter(trips, t -> ((Trip) t).getDeparture().equalsIgnoreCase(departure));
 		
 				List<Trip> filteredList = new ArrayList<Trip>();
 				trips.forEach(trip -> {
-					System.out.println(trip.getDeparture());
 					if (trip.getDeparture().equalsIgnoreCase(departure) && trip.getArrival().equalsIgnoreCase(arrival)) {
 						filteredList.add(trip);
-						System.out.println("Trip found: " + trip);
 					}
 				});
 				
-
-		
 	    return filteredList;
-		//return trips;
+		
 	}   
 	
 	@Override
