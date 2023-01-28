@@ -1,5 +1,6 @@
 package net.javaguides.springboot.service;
 
+import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +49,11 @@ public class BusServiceImpl implements BusService {
         }
 
         return bus;
+    }
+
+    @Override
+    public List<Bus> findAll() {
+        return busRepo.findAll();
     }
 
 }
