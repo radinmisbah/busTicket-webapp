@@ -5,9 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import net.javaguides.springboot.model.Booking;
+import net.javaguides.springboot.model.Trip;
 import net.javaguides.springboot.service.BookingService;
 
 
@@ -32,16 +34,25 @@ public class BookingController {
         //create model attrobute to bind form data
         Booking Booking = new Booking();
         model.addAttribute("Booking", Booking);
+
         return "new_ticket";
 
     }
 
-    @PostMapping("/saveTicket")
+    @PostMapping("/user/saveTicket")
     public String saveTicket(@ModelAttribute("Booking") Booking Booking){
         //save ticket to database
         BookingService.saveTicket(Booking);
         return "redirect:/";
     }
+
+    @GetMapping("/user/viewTicket")
+    public String viewTicket (Model model){
+            
+    
+        return "show_book";
+    }
+    
 
 
 
