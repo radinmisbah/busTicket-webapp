@@ -12,19 +12,24 @@ import net.javaguides.springboot.repository.BookingRepository;
 public class BookingServiceImpl implements BookingService {
 
     @Autowired
-    private BookingRepository BookingRepository;
+    private BookingRepository bookingRepository;
 
     @Override
     public List<Booking> getAllBooking() {
         // TODO Auto-generated method stub
-        return BookingRepository.findAll();
+        return bookingRepository.findAll();
     }
 
     @Override
     public void saveTicket(Booking Booking) {
-        // TODO Auto-generated method stub
-        this.BookingRepository.save(Booking);
+        this.bookingRepository.save(Booking);
         
+    }
+
+    @Override
+    public int countUnavailableByTripId(Long id) {
+        // TODO Auto-generated method stub
+        return bookingRepository.countByTripIdAndPaid(id);
     }
     
 }

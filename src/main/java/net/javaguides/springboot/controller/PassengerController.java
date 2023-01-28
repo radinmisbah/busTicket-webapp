@@ -5,8 +5,10 @@ import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import net.javaguides.springboot.model.Booking;
 import net.javaguides.springboot.model.Trip;
 import net.javaguides.springboot.model.User;
+import net.javaguides.springboot.service.BookingService;
 import net.javaguides.springboot.service.TripService;
 import net.javaguides.springboot.service.UserService;
 
@@ -33,6 +36,9 @@ public class PassengerController {
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private BookingService bookingService;
 
     @PreAuthorize("hasRole('ROLE_USER')")
     //redirect to form to search new bus
@@ -52,8 +58,15 @@ public class PassengerController {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = formatter.parse(departureDate);
 		List<Trip> tripList = tripService.searchTrip(departure, arrival, date);
+		Map<Long, Long> availableSeatsMap = new HashMap<>();
+
+		for(Trip trip: tripList) {
+            long availableSeats = trip.getMaxSeat() - bookingService.countUnavailableByTripId(trip.getId());
+			availableSeatsMap.put(trip.getId(), availableSeats);
+        }
 	    
 		model.addAttribute("tripList", tripList);
+		model.addAttribute("availableSeatsMap", availableSeatsMap);
 		
 		return "view_trip_list";
 	}

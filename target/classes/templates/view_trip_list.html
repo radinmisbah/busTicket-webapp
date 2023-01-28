@@ -105,7 +105,8 @@
 					<td th:text="${trip.arrival}"></td>
                     <td th:text="${trip.departureTime}"></td>
 					<td >RM <span th:text="${trip.price}"></span></td>
-					<td th:text="${trip.departureDate}"></td>
+					<td th:text="${availableSeatsMap[trip.id]}"></td>
+					
 					
                       <td> <a th:href="@{/user/bookTrip/{id}(id=${trip.id})}" class="btn btn-primary">Book Now</a>
 					</td>
