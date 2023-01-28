@@ -7,38 +7,40 @@ import org.springframework.data.domain.Page;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import net.javaguides.springboot.model.Company;
+import net.javaguides.springboot.model.Bus;
+import net.javaguides.springboot.service.BusService;
 import net.javaguides.springboot.service.CompanyService;
 
 @Controller
-public class CompanyController {
+public class BusController {
     @Autowired
-	private CompanyService companyService;
+	private BusService busService;
 
-    //redirect to manage company page
+    @Autowired
+    private CompanyService companyService;
+
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/admin/companies")
-	public String showManageCompany(Model model) {
-        //redirected to paginated method
-		return findPaginated(1, "name", "asc", model);		
+    @GetMapping("/admin/buses")
+	public String showManageBus(Model model) {
+
+		return findPaginated(1, "id", "asc", model);		
 	}
 
-    //mapping for page if the the list too long
-    @GetMapping("/admin/companies/page/{pageNo}")
+    @GetMapping("/admin/buses/page/{pageNo}")
     public String findPaginated(@PathVariable (value = "pageNo") int pageNo, 
             @RequestParam("sortField") String sortField,
             @RequestParam("sortDir") String sortDir,
             Model model) {
         int pageSize = 15;
         
-        Page<Company> page = companyService.findPaginated(pageNo, pageSize, sortField, sortDir);
-        List<Company> companyList = page.getContent();
-        Company company = new Company();
+        Page<Bus> page = busService.findPaginated(pageNo, pageSize, sortField, sortDir);
+        List<Bus> registeredBuses = page.getContent();
         
         model.addAttribute("currentPage", pageNo);
         model.addAttribute("totalPages", page.getTotalPages());
@@ -46,26 +48,28 @@ public class CompanyController {
         model.addAttribute("sortField", sortField);
         model.addAttribute("sortDir", sortDir);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
-        model.addAttribute("companyList", companyList);
-        model.addAttribute("company", company);
+        model.addAttribute("registeredBuses", registeredBuses);
+        model.addAttribute("bus", new Bus());
+        model.addAttribute("companies", companyService.findAll());
         
-        return "company_index";
+        return "bus_index";
     }
 
-    //do http post request to save new company info
-    @PostMapping("/admin/companies/save")
-	public String saveCompany(@ModelAttribute("company") Company company) {
-		// save company to database
-		companyService.saveCompany(company);
+    @PostMapping("/admin/buses/save")
+	public String saveBus(@ModelAttribute("registeredBus") Bus bus, BindingResult result) {
+        if(result.hasErrors()) {
 
-		return "redirect:/admin/companies";
+        } else {
+            busService.saveBus(bus);
+        }
+
+		return "redirect:/admin/buses";
 	}
 
-    @GetMapping("/admin/companies/{id}/delete")
+    @GetMapping("/admin/buses/{id}/delete")
 	public String deleteCompany(@PathVariable (value = "id") long id) {
-		// call delete company method 
-		companyService.deleteCompanyById(id);
+		busService.deleteBusById(id);
 
-		return "redirect:/admin/companies";
+		return "redirect:/admin/buses";
 	}
 }

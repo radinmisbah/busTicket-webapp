@@ -59,5 +59,13 @@ public class Bus {
 	public void setDriverName(String driverName) {
 		this.driverName = driverName;
 	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
 }
 

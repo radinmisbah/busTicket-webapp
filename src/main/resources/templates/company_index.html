@@ -178,7 +178,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:if="${companyList == null}"><td colspan="2" class="text-center">No records found.</td></tr>
+				<tr th:if="${#lists.isEmpty(companyList)}"><td colspan="2" class="text-center">No records found.</td></tr>
 				<tr th:each="companyInstance : ${companyList}">
 					<td th:text="${companyInstance.id}" width="150"></td>
 					<td th:text="${companyInstance.name}"></td>

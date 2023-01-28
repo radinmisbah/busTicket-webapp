@@ -1,16 +1,14 @@
 package net.javaguides.springboot.service;
 
+import java.util.List;
 import java.util.Optional;
-
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
 import net.javaguides.springboot.model.Company;
 import net.javaguides.springboot.repository.CompanyRepository;
 
@@ -56,5 +54,9 @@ public class CompanyServiceImpl implements CompanyService {
 
     public Company findId4() {
         return companyRepo.findId4();
+    }
+
+    public List<Company> findAll() {
+        return companyRepo.findAll();
     }
 }

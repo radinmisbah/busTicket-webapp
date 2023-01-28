@@ -1,7 +1,7 @@
 package net.javaguides.springboot.service;
 
+import java.util.List;
 import org.springframework.data.domain.Page;
-
 import net.javaguides.springboot.model.Company;
 
 public interface CompanyService {
@@ -10,4 +10,5 @@ public interface CompanyService {
     public void deleteCompanyById(long id);
     public Company getCompanyById(long id);
     public Company findId4();
+    public List<Company> findAll();
 }
