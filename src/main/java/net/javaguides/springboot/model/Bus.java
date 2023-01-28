@@ -1,5 +1,9 @@
 package net.javaguides.springboot.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,6 +20,7 @@ public class Bus {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "bus_ID")
 	private Long id;
 
 	
@@ -27,6 +33,10 @@ public class Bus {
     @ManyToOne
 	@JoinColumn(name = "company_id", nullable = false)
     Company company;
+
+	@OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bus_ID", referencedColumnName = "bus_ID")
+    private List<Trip> trips = new ArrayList<>();
 
     public Bus() {
 	}
@@ -59,5 +69,26 @@ public class Bus {
 	public void setDriverName(String driverName) {
 		this.driverName = driverName;
 	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	public List<Trip> getTrips() {
+		return trips;
+	}
+
+	public void setTrips(List<Trip> trips) {
+		this.trips = trips;
+	}
+
+	//@OneToMany(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "bus_ID", referencedColumnName = "bus_ID")
+    //private List<Trip> trips = new ArrayList<>();
+	
 }
 
