@@ -195,7 +195,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:if="${#lists.isEmpty(registeredBuses)}"><td colspan="4" class="text-center">No records found.</td></tr>
+				<tr th:if="${#lists.isEmpty(registeredBuses)}"><td colspan="5" class="text-center">No records found.</td></tr>
 				<tr th:each="registeredBus : ${registeredBuses}">
 					<td th:text="${registeredBus.id}" width="150"></td>
 					<td th:text="${registeredBus.driverName}"></td>

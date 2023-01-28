@@ -128,8 +128,8 @@
 						Manage Bus
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<li><a class="dropdown-item" href="#">All buses</a></li>
-						<li><a class="dropdown-item" href="#">Register new bus</a></li>
+						<li><a class="dropdown-item" th:href="@{/admin/buses}">All buses</a></li>
+						<li><a class="dropdown-item" th:href="@{/admin/buses?register}">Register new bus</a></li>
 					</ul>
 				</li>
 				<li class="nav-item dropdown">
@@ -178,7 +178,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:if="${#lists.isEmpty(companyList)}"><td colspan="2" class="text-center">No records found.</td></tr>
+				<tr th:if="${#lists.isEmpty(companyList)}"><td colspan="3" class="text-center">No records found.</td></tr>
 				<tr th:each="companyInstance : ${companyList}">
 					<td th:text="${companyInstance.id}" width="150"></td>
 					<td th:text="${companyInstance.name}"></td>

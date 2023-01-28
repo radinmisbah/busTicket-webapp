@@ -35,10 +35,20 @@ public class User {
 	
 	private String password;
 
-	@Column(name = "mobileNumber")
+	@Column(name = "mobile_number")
 	@NumberFormat(style = Style.NUMBER)
 	private String mobileNumber;
 	
+	@Column(name = "role")
+	private String role;
+
+	@Column(name = "registered_at")
+	@CreationTimestamp
+	private LocalDateTime dateOfRegister;
+
+	@OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "purchased_by", referencedColumnName = "id")
+    private List<Booking> Bookings = new ArrayList<>();
 
 	public String getMobileNumber() {
 		return mobileNumber;
@@ -47,16 +57,6 @@ public class User {
 	public void setMobileNumber(String mobileNumber) {
 		this.mobileNumber = mobileNumber;
 	}
-	@Column(name = "role")
-	private String role;
-
-	@Column(name = "dateOfRegister")
-	@CreationTimestamp
-	private LocalDateTime dateOfRegister;
-
-	@OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "purchased_by", referencedColumnName = "id")
-    private List<Booking> Bookings = new ArrayList<>();
 
 	public User() {
 		

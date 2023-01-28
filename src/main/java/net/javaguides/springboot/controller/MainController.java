@@ -22,7 +22,7 @@ public class MainController {
     public String redirectByRole() {
 
         if (userService.getCurrentUser().getRole().equals("ROLE_ADMIN")) {
-            return "redirect:/admin/viewManageBus";
+            return "redirect:/admin/companies";
         } else if (userService.getCurrentUser().getRole().equals("ROLE_USER")) {
             return "redirect:/user/mainSearchTrip";
         }

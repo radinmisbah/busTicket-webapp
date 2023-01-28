@@ -35,21 +35,21 @@ public class Trip {
 	@Column(name = "arrival")
 	private String arrival;
 
-    @Column(name = "departureDate")
+    @Column(name = "departure_date")
     @Temporal (TemporalType.DATE)
 	private  Date departureDate;
 
-    @Column(name = "departureTime")
+    @Column(name = "departure_time")
 	private  LocalTime departureTime;
 	
-	@Column(name = "maxSeat")
+	@Column(name = "max_seat")
 	private int maxSeat;
 	
 	@Column(name = "price")
     @NumberFormat(pattern = "#,###.00")
 	private float price;
 
-    @Column(name = "tripStatus")
+    @Column(name = "status")
 	private String tripStatus;
 	
     @OneToMany(cascade = CascadeType.ALL)
@@ -60,12 +60,6 @@ public class Trip {
     @JoinColumn(name = "bus_id")
     private Bus bus;
 
-    public Bus getBus() {
-        return bus;
-    }
-    public void setBus(Bus bus) {
-        this.bus = bus;
-    }
     public Trip(){
 
     }
@@ -84,7 +78,6 @@ public class Trip {
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public String getDeparture() {
         return departure;
@@ -140,5 +133,13 @@ public class Trip {
 
     public void setTripStatus(String tripStatus) {
         this.tripStatus = tripStatus;
+    }
+
+    public Bus getBus() {
+        return bus;
+    }
+
+    public void setBus(Bus bus) {
+        this.bus = bus;
     }
 }
