@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import net.javaguides.springboot.model.Booking;
 import net.javaguides.springboot.model.Trip;
+import net.javaguides.springboot.model.User;
 import net.javaguides.springboot.service.BookingService;
 
 
@@ -21,6 +22,7 @@ public class BookingController {
 
     @Autowired
     private BookingService BookingService;
+
     
     //display list of sold ticket
     @GetMapping("/view")
@@ -58,17 +60,17 @@ public class BookingController {
         return "show_book";
     }
 
-    @GetMapping("/user/myBooking/{id}")
-	public String showMyBooking(@PathVariable ( value = "id") long id, Model model) {
 
-        List<Booking> bookingList = BookingService.getAllBookingByUser(id);
+    
+    @GetMapping("/user/cancelBooking/{id}")
+	public String cancelMyBooking(@PathVariable ( value = "id") long id, Model model) {
+
+        Booking booking = BookingService.getById(id);
 	
-		model.addAttribute("bookingList", bookingList);
+		//model.addAttribute("bookingList", bookingList);
 		
 		return "my_booking";
 	}
-    
-  
 
 
 

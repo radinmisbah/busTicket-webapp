@@ -12,5 +12,5 @@ public interface BookingService {
     int countUnavailableByTripId(Long id);
     List<Integer> getOccupiedSeat(Long id);
     List<Booking> getAllBookingByUser(Long id);
-    
+    Booking getById(Long id);
 }

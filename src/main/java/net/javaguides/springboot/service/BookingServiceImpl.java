@@ -2,6 +2,7 @@ package net.javaguides.springboot.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,19 @@ public class BookingServiceImpl implements BookingService {
     public List<Booking> getAllBookingByUser(Long id) {
         // TODO Auto-generated method stub
         return bookingRepository.findAllByPurchasedBy(id);
+    }
+
+    @Override
+    public Booking getById(Long id) {
+        // TODO Auto-generated method stub
+        Optional<Booking> optional = bookingRepository.findById(id);
+		Booking ticket = null;
+		if (optional.isPresent()) {
+			ticket = optional.get();
+		} else {
+			throw new RuntimeException(" bus not found for id :: " + id);
+		}
+		return ticket;
     }
     
 }

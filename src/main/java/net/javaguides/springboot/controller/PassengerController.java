@@ -112,6 +112,19 @@ public class PassengerController {
 		return "book_trip";
 	}
 
+	@GetMapping("/user/myBooking")
+	public String showMyBooking(Model model) {
+ 
+		//get current user
+		User currentUser = userService.getCurrentUser();
+		Long userId = currentUser.getId();
+        List<Booking> bookingList = bookingService.getAllBookingByUser(userId);
+        
+		model.addAttribute("bookingList", bookingList);
+		
+		return "my_booking";
+	}
+
 
 
 
