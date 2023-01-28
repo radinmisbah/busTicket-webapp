@@ -109,20 +109,68 @@
 				width: 100%;
 			}
 		}
+		body {
+			font-family: 'Poppins',sans-serif;
+		}
+		.navbar-container {
+			background-color: #1e90ff;
+		}
+
+		.navbar-container .navbar-brand{
+			color: #ffffff;
+		}
+
+		.navbar-container .nav-link{
+			color: #ffffff;
+		}
+
+		.navbar-container .nav-btn {
+			background-color: #ffffff;
+			color: #000000;
+			border-radius: 5px;
+		}
+
+		.container {
+			padding-top: 20px;
+		}
+
+		
 	</style>
 </head>
 <body>
-	<!-- Create HTML registration form -->
+	
+	<nav class="navbar-container navbar navbar-expand-lg p-3">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Bus Ticketing System</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class=" collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="navbar-nav ms-auto ">
+				
+				<li class="nav-item dropdown">
+					<a class="nav-link mx-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Manage Booking
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<li><a class="dropdown-item" th:href="@{/user/myBooking/{id}(id=${userID})}">My Booking</a></li>
+						<li><a class="dropdown-item" href="#">Booking History</a></li>
+					</ul>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link mx-2 nav-btn" th:href="@{/logout}">Logout</a>
+				</li>
+			</ul>
+			</div>
+		</div>
+	</nav>
+
 	<div class="background min-vw-100 min-vh-100 d-flex flex-column justify-content-center align-items-center">
 		<div class="form-container">
 
 				<h3>Book Your Trip Now</h3>
 
-				<!-- success message 
-				<div th:if="${param.success}">
-					<div class="alert alert-info">You've successfully registered
-						to our awesome app!</div>
-				</div>-->
 
 				<form th:action="@{/user/viewTripList}" method="get" th:object="${trip}">
 					<div class="d-flex">

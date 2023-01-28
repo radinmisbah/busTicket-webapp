@@ -45,5 +45,11 @@ public class BookingServiceImpl implements BookingService {
         
         return occupiedSeat;
     }
+
+    @Override
+    public List<Booking> getAllBookingByUser(Long id) {
+        // TODO Auto-generated method stub
+        return bookingRepository.findAllByPurchasedBy(id);
+    }
     
 }

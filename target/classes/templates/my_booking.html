@@ -68,7 +68,7 @@
 	</nav>
 	
 	<div class="container my-2">
-	<h1>Bus List</h1>
+	<h1>My Bus Ticket</h1>
 	
 	
 	<a th:href = "@{/user/mainSearchTrip}" class="btn btn-primary btn-sm mb-3"> Search New trip </a>
@@ -92,23 +92,23 @@
                         Price
                 </th>
                 <th>
-                    Available Seat
+                    Seat Number
                 </th>
 
 					<th> Actions </th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="trip : ${tripList}">
-					<td th:text="${trip.bus.company.name}"></td>
-					<td th:text="${trip.departure}"></td>
-					<td th:text="${trip.arrival}"></td>
-                    <td th:text="${trip.departureTime}"></td>
-					<td >RM <span th:text="${trip.price}"></span></td>
-					<td th:text="${availableSeatsMap[trip.id]}"></td>
+				<tr th:each="b : ${bookingList}">
+					<td th:text="${b.trip.bus.company.name}"></td>
+					<td th:text="${b.trip.departure}"></td>
+					<td th:text="${b.trip.arrival}"></td>
+                    <td th:text="${b.trip.departureTime}"></td>
+					<td >RM <span th:text="${b.finalPrice}"></span></td>
+					<td th:text="${b.seatNumber}"></td>
 					
 					
-                      <td> <a th:href="@{/user/bookTrip/{id}(id=${trip.id})}" class="btn btn-primary">Book Now</a>
+                     <!-- <td> <a th:href="@{/user/bookTrip/{id}(id=${trip.id})}" class="btn btn-primary">Book Now</a>-->
 					</td>
 
                    
@@ -117,7 +117,7 @@
 			</tbody>
 		</table>
 
-        <div th:if="${tripList.empty}">
+        <div th:if="${bookingList.empty}">
             <div class="alert alert-info text-center">No bus available on the selected trip</div>
         </div>
 		

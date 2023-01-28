@@ -1,5 +1,7 @@
 package net.javaguides.springboot.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,7 +44,7 @@ public class BookingController {
     @PostMapping("/user/saveTicket")
     public String saveTicket(@ModelAttribute("booking") Booking booking){
 
-        booking.setFinalPrice(booking.getTrip().getPrice());
+        
         booking.setBookingStatus("Paid");
         //save ticket to database
         BookingService.saveTicket(booking);
@@ -55,7 +57,18 @@ public class BookingController {
     
         return "show_book";
     }
+
+    @GetMapping("/user/myBooking/{id}")
+	public String showMyBooking(@PathVariable ( value = "id") long id, Model model) {
+
+        List<Booking> bookingList = BookingService.getAllBookingByUser(id);
+	
+		model.addAttribute("bookingList", bookingList);
+		
+		return "my_booking";
+	}
     
+  
 
 
 

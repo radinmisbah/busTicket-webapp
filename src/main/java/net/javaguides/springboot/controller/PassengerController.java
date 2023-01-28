@@ -48,6 +48,11 @@ public class PassengerController {
 		Trip trip = new Trip();
 		model.addAttribute("trip", trip);
 
+		//get current user
+		User currentUser = userService.getCurrentUser();
+		Long userId = currentUser.getId();
+		model.addAttribute("userID", userId);
+
 		return "search_trip";
 	}
 
@@ -68,6 +73,10 @@ public class PassengerController {
 		model.addAttribute("tripList", tripList);
 		model.addAttribute("availableSeatsMap", availableSeatsMap);
 
+		//get current user
+		User currentUser = userService.getCurrentUser();
+		model.addAttribute("user", currentUser);
+
 		return "view_trip_list";
 	}
 
@@ -84,6 +93,7 @@ public class PassengerController {
 		Booking booking = new Booking();
 		booking.setTrip(trip);
 		booking.setUser(currentUser);
+		booking.setFinalPrice(trip.getPrice());
 
 		//generate seat number
 		ArrayList<Integer> seatNum = new ArrayList<Integer>();

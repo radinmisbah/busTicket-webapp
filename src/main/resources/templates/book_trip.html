@@ -122,6 +122,7 @@
 				<form th:action="@{/user/saveTicket}" method="post" th:object="${booking}">
 					<input type="hidden" th:field="*{trip.id}" th:value="${booking.trip.id}"/>
 					<input type="hidden" th:field="*{user.id}" th:value="${booking.user.id}"/>
+					<input type="hidden" th:field="*{finalPrice}" th:value="${booking.trip.price}"/>
 					<div class="d-flex">
 						<div class="input-container">
 							<label> Bus Name :</label>
@@ -181,9 +182,7 @@
 						</div>
 						
 					</div>
-					
-
-					<button type="submit">Confirm Booking</button>
+						<button type="submit">Confirm Booking</button>
 				</form>
 			</div>
 		</div>
