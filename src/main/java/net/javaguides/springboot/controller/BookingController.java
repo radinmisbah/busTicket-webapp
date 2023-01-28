@@ -50,7 +50,7 @@ public class BookingController {
         booking.setBookingStatus("Paid");
         //save ticket to database
         BookingService.saveTicket(booking);
-        return "redirect:/";
+        return "redirect:/user/myBooking";
     }
 
     @GetMapping("/user/viewTicket")
@@ -62,15 +62,7 @@ public class BookingController {
 
 
     
-    @GetMapping("/user/cancelBooking/{id}")
-	public String cancelMyBooking(@PathVariable ( value = "id") long id, Model model) {
-
-        Booking booking = BookingService.getById(id);
-	
-		//model.addAttribute("bookingList", bookingList);
-		
-		return "my_booking";
-	}
+    
 
 
 

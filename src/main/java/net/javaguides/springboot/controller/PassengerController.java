@@ -48,11 +48,6 @@ public class PassengerController {
 		Trip trip = new Trip();
 		model.addAttribute("trip", trip);
 
-		//get current user
-		User currentUser = userService.getCurrentUser();
-		Long userId = currentUser.getId();
-		model.addAttribute("userID", userId);
-
 		return "search_trip";
 	}
 
@@ -123,6 +118,17 @@ public class PassengerController {
 		model.addAttribute("bookingList", bookingList);
 		
 		return "my_booking";
+	}
+
+	@GetMapping("/user/cancelBooking/{id}")
+	public String cancelMyBooking(@PathVariable ( value = "id") long id, Model model) {
+
+        Booking booking = bookingService.getById(id);
+	
+		booking.setBookingStatus("Cancel");
+		bookingService.saveTicket(booking);
+		
+		return "redirect:/user/myBooking";
 	}
 
 

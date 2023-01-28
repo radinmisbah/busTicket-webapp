@@ -55,7 +55,7 @@
 						Manage Booking
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<li><a class="dropdown-item" th:href="@{/user/myBooking">My Booking</a></li>
+						<li><a class="dropdown-item" th:href="@{/user/myBooking}">My Booking</a></li>
 						<li><a class="dropdown-item" href="#">Booking History</a></li>
 					</ul>
 				</li>
@@ -108,7 +108,7 @@
 					<td th:text="${b.seatNumber}"></td>
 					
 					
-                     <!-- <td> <a th:href="@{/user/bookTrip/{id}(id=${trip.id})}" class="btn btn-primary">Book Now</a>-->
+                      <td> <a th:href="@{/user/cancelBooking/{id}(id=${b.id})}" class="btn btn-primary" style="background-color: red;">Request Cancel Booking</a>
 					</td>
 
                    
