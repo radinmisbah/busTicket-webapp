@@ -27,7 +27,6 @@ public class Trip {
     
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "trip_ID")
 	private Long id;
 
 	@Column(name = "departure")
@@ -54,7 +53,7 @@ public class Trip {
 	private String tripStatus;
 	
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "trip_ID", referencedColumnName = "trip_ID")
+    @JoinColumn(name = "trip_id", referencedColumnName = "id")
     private List<Booking> Bookings = new ArrayList<>();
 
     @ManyToOne
@@ -138,7 +137,7 @@ public class Trip {
     public String getTripStatus() {
         return tripStatus;
     }
-    
+
     public void setTripStatus(String tripStatus) {
         this.tripStatus = tripStatus;
     }

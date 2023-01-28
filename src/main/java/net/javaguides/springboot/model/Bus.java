@@ -20,10 +20,8 @@ public class Bus {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "bus_ID")
 	private Long id;
 
-	
 	@Column(name = "reg_number")
 	private String regNumber;
 
@@ -35,7 +33,7 @@ public class Bus {
     Company company;
 
 	@OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "bus_ID", referencedColumnName = "bus_ID")
+    @JoinColumn(name = "bus_id", referencedColumnName = "id")
     private List<Trip> trips = new ArrayList<>();
 
     public Bus() {
