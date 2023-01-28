@@ -25,6 +25,7 @@ import net.javaguides.springboot.model.Booking;
 import net.javaguides.springboot.model.Trip;
 import net.javaguides.springboot.model.User;
 import net.javaguides.springboot.service.BookingService;
+import net.javaguides.springboot.service.QrCodeService;
 import net.javaguides.springboot.service.TripService;
 import net.javaguides.springboot.service.UserService;
 
@@ -39,6 +40,9 @@ public class PassengerController {
 
 	@Autowired
 	private BookingService bookingService;
+
+	@Autowired
+	private QrCodeService qrCodeService;
 
     @PreAuthorize("hasRole('ROLE_USER')")
     //redirect to form to search new bus
@@ -142,6 +146,14 @@ public class PassengerController {
 		model.addAttribute("bookingList", bookingList);
 		
 		return "booking_history";
+	}
+
+	@GetMapping("/user/testQR")
+	public String testCreateQR(Model model) {
+ 
+		qrCodeService.createQr();
+		
+		return "redirect:/";
 	}
 
 
