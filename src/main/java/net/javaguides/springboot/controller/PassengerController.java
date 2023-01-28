@@ -67,7 +67,7 @@ public class PassengerController {
 	    
 		model.addAttribute("tripList", tripList);
 		model.addAttribute("availableSeatsMap", availableSeatsMap);
-		
+
 		return "view_trip_list";
 	}
 
@@ -87,8 +87,14 @@ public class PassengerController {
 
 		//generate seat number
 		ArrayList<Integer> seatNum = new ArrayList<Integer>();
+
+		ArrayList<Integer> occupideSeat = (ArrayList<Integer>) bookingService.getOccupiedSeat(trip.getId());
+
 		for (int i = 1; i <= trip.getMaxSeat(); i++) {
-		seatNum.add(i);
+
+			if(!occupideSeat.contains(i)){
+				seatNum.add(i);
+			}
 	}
 		// set bus as a model attribute to pre-populate the form
 		model.addAttribute("booking", booking);

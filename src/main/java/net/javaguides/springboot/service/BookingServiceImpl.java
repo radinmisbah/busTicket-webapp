@@ -1,5 +1,6 @@
 package net.javaguides.springboot.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,19 @@ public class BookingServiceImpl implements BookingService {
     public int countUnavailableByTripId(Long id) {
         // TODO Auto-generated method stub
         return bookingRepository.countByTripIdAndPaid(id);
+    }
+
+    @Override
+    public List<Integer> getOccupiedSeat(Long id) {
+        List<Booking> bookingList = bookingRepository.findByTripIdAndStatus(id);
+
+        ArrayList<Integer> occupiedSeat = new ArrayList<Integer>();
+		for (Booking booking : bookingList) {
+            int seat = booking.getSeatNumber();
+            occupiedSeat.add(seat);
+        }
+        
+        return occupiedSeat;
     }
     
 }
