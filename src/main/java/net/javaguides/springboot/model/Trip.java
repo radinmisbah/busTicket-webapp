@@ -12,9 +12,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -30,14 +34,20 @@ public class Trip {
 	@Column(name = "trip_ID")
 	private Long id;
 
-    @Column(name = "busName")
-	private String busName;
 	
+
 	@Column(name = "departure")
 	private String departure;
 	
 	@Column(name = "arrival")
 	private String arrival;
+
+    @Column(name = "departureDate")
+    @Temporal (TemporalType.DATE)
+	private  Date departureDate;
+
+    @Column(name = "departureTime")
+	private  LocalTime departureTime;
 	
 	@Column(name = "maxSeat")
 	private int maxSeat;
@@ -45,25 +55,28 @@ public class Trip {
 	@Column(name = "price")
     @NumberFormat(pattern = "#,###.00")
 	private float price;
-	
-	@Column(name = "departureTime")
-	private  LocalTime departureTime;
-
-    @Column(name = "departureDate")
-	private Date departureDate;
 
     @Column(name = "tripStatus")
 	private String tripStatus;
-
+	
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "trip_ID", referencedColumnName = "trip_ID")
-    private List<SoldTicket> soldTickets = new ArrayList<>();
+    private List<Booking> Bookings = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "bus_id")
+    private Bus bus;
+
+    public Bus getBus() {
+        return bus;
+    }
+    public void setBus(Bus bus) {
+        this.bus = bus;
+    }
     public Trip(){
 
     }
-    public Trip(String busName, String departure, String arrival, int maxSeat, float price, LocalTime departureTime) {
-        this.busName = busName;
+    public Trip(String departure, String arrival, int maxSeat, float price, LocalTime departureTime) {
         this.departure = departure;
         this.arrival = arrival;
         this.maxSeat = maxSeat;
@@ -79,13 +92,6 @@ public class Trip {
         this.id = id;
     }
 
-    public String getBusName() {
-        return busName;
-    }
-
-    public void setBusName(String busName) {
-        this.busName = busName;
-    }
 
     public String getDeparture() {
         return departure;
@@ -126,25 +132,20 @@ public class Trip {
     public void setDepartureTime(LocalTime departureTime) {
         this.departureTime = departureTime;
     }
-
     public Date getDepartureDate() {
-		return departureDate;
-	}
+        return departureDate;
+    }
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
+    }
+  
 
-	public void setDepartureDate(Date departureDate) {
-		this.departureDate = departureDate;
-	}
+
     public String getTripStatus() {
         return tripStatus;
     }
     public void setTripStatus(String tripStatus) {
         this.tripStatus = tripStatus;
-    }
-    public List<SoldTicket> getSoldTickets() {
-        return soldTickets;
-    }
-    public void setSoldTickets(List<SoldTicket> soldTickets) {
-        this.soldTickets = soldTickets;
     }
 
     

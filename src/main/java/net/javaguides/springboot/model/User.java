@@ -56,7 +56,7 @@ public class User {
 
 	@OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "purchased_by", referencedColumnName = "id")
-    private List<SoldTicket> soldTickets = new ArrayList<>();
+    private List<Booking> Bookings = new ArrayList<>();
 
 	public User() {
 		

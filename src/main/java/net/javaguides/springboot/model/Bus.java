@@ -34,6 +34,10 @@ public class Bus {
 	@JoinColumn(name = "company_id", nullable = false)
     Company company;
 
+	@OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bus_ID", referencedColumnName = "bus_ID")
+    private List<Trip> trips = new ArrayList<>();
+
     public Bus() {
 	}
 	
@@ -66,9 +70,25 @@ public class Bus {
 		this.driverName = driverName;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "bus_ID", referencedColumnName = "bus_ID")
-    private List<Trip> trips = new ArrayList<>();
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	public List<Trip> getTrips() {
+		return trips;
+	}
+
+	public void setTrips(List<Trip> trips) {
+		this.trips = trips;
+	}
+
+	//@OneToMany(cascade = CascadeType.ALL)
+    //@JoinColumn(name = "bus_ID", referencedColumnName = "bus_ID")
+    //private List<Trip> trips = new ArrayList<>();
 	
 }
 
