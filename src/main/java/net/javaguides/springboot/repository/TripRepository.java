@@ -12,6 +12,7 @@ public interface TripRepository extends JpaRepository<Trip, Long> {
 
     List<Trip> findByDepartureAndArrival(String departure, String arrival);
     List<Trip> findByDepartureAndArrivalAndDepartureDate(String departure, String arrival, Date departureDate);
+    List<Trip> findAllByDepartureDate (Date departureDate);
 
     
 }

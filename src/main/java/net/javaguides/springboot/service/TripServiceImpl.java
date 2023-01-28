@@ -1,10 +1,14 @@
 package net.javaguides.springboot.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.CollectionUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -58,9 +62,34 @@ public class TripServiceImpl implements TripService {
 	}
 
 	@Override
-	public List<Trip> searchTrip(String departure, String destination, Date departureDate) {
+	public List<Trip> searchTrip(String departure, String arrival, Date departureDate) {
+
+		List<Trip> trips = tripRepo.findAllByDepartureDate(departureDate);
+
+		//List<Trip> filteredTrips = trips.stream()
+         //       .filter(t -> t.getDeparture().equalsIgnoreCase(departure) && t.getArrival().IgnoreCase(arrival))
+         //       .collect(Collectors.toList());
+	    
+				//CollectionUtils.filter(trips, t -> ((Trip) t).getDeparture().equalsIgnoreCase(departure));
 		
-		return tripRepo.findByDepartureAndArrivalAndDepartureDate(departure,destination,departureDate);
-	}    
+				List<Trip> filteredList = new ArrayList<Trip>();
+				trips.forEach(trip -> {
+					System.out.println(trip.getDeparture());
+					if (trip.getDeparture().equalsIgnoreCase(departure) && trip.getArrival().equalsIgnoreCase(arrival)) {
+						filteredList.add(trip);
+						System.out.println("Trip found: " + trip);
+					}
+				});
+				
+
+		
+	    return filteredList;
+		//return trips;
+	}   
+	
+	@Override
+	public List<Trip> findbydate(Date departureDate){
+        return tripRepo.findAllByDepartureDate(departureDate);
+	}
 }
 

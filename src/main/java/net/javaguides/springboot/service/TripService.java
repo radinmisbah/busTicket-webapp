@@ -11,6 +11,7 @@ public interface TripService {
     public Page<Trip> findPaginated(int pageNo, int pageSize, String sortField, String sortDirection);
     public void deleteBusById(long id);
     public Trip getBusById(long id);
-    public List<Trip> searchBus(String departure, String destination);
-    public List<Trip> searchTrip(String departure, String destination, Date departureDate);
+    public List<Trip> searchBus(String departure, String arrival);
+    public List<Trip> searchTrip(String departure, String arrival, Date departureDate);
+    public List<Trip> findbydate(Date departureDate);
 }
