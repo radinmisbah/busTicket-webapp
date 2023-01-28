@@ -54,16 +54,6 @@ public class CompanyController {
         return "company_index";
     }
 
-    //redirect to form to add new company
-    @GetMapping("/admin/companies/register")
-	public String showRegisterCompanyForm(Model model) {
-		// create model attribute to bind form data
-		Company company = new Company();
-		model.addAttribute("company", company);
-
-		return "company_register_form";
-	}
-
     //do http post request to save new company info
     @PostMapping("/admin/companies/save")
 	public String saveCompany(@ModelAttribute("company") Company company) {
