@@ -131,6 +131,19 @@ public class PassengerController {
 		return "redirect:/user/myBooking";
 	}
 
+	@GetMapping("/user/BookingHistory")
+	public String showBookingHistory(Model model) {
+ 
+		//get current user
+		User currentUser = userService.getCurrentUser();
+		Long userId = currentUser.getId();
+        List<Booking> bookingList = bookingService.getBookingHistoryForId(userId);
+        
+		model.addAttribute("bookingList", bookingList);
+		
+		return "booking_history";
+	}
+
 
 
 

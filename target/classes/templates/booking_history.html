@@ -95,7 +95,7 @@
                     Seat Number
                 </th>
 
-					<th> Actions </th>
+					<th> Status </th>
 				</tr>
 			</thead>
 			<tbody>
@@ -106,17 +106,13 @@
                     <td th:text="${b.trip.departureTime}"></td>
 					<td >RM <span th:text="${b.finalPrice}"></span></td>
 					<td th:text="${b.seatNumber}"></td>
-					
-					
-                      <td> <a th:href="@{/user/cancelBooking/{id}(id=${b.id})}" class="btn btn-primary" style="background-color: red;">Request Cancel Booking</a>
-					</td>
-
+                    <td th:text="${b.bookingStatus}"></td>
 				</tr>
 			</tbody>
 		</table>
 
         <div th:if="${bookingList.empty}">
-            <div class="alert alert-info text-center">No Active booking right now</div>
+            <div class="alert alert-info text-center">No Booking History</div>
         </div>
 		
 	</div>

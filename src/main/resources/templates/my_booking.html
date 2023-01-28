@@ -56,7 +56,7 @@
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
 						<li><a class="dropdown-item" th:href="@{/user/myBooking}">My Booking</a></li>
-						<li><a class="dropdown-item" href="#">Booking History</a></li>
+						<li><a class="dropdown-item" th:href="@{/user/BookingHistory}">Booking History</a></li>
 					</ul>
 				</li>
 				<li class="nav-item">
@@ -111,14 +111,12 @@
                       <td> <a th:href="@{/user/cancelBooking/{id}(id=${b.id})}" class="btn btn-primary" style="background-color: red;">Request Cancel Booking</a>
 					</td>
 
-                   
-					
 				</tr>
 			</tbody>
 		</table>
 
         <div th:if="${bookingList.empty}">
-            <div class="alert alert-info text-center">No bus available on the selected trip</div>
+            <div class="alert alert-info text-center">No Active booking right now</div>
         </div>
 		
 	</div>

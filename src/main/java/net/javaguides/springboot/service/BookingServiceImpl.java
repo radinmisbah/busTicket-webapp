@@ -61,9 +61,15 @@ public class BookingServiceImpl implements BookingService {
 		if (optional.isPresent()) {
 			ticket = optional.get();
 		} else {
-			throw new RuntimeException(" bus not found for id :: " + id);
+			throw new RuntimeException("booking not found for id :: " + id);
 		}
 		return ticket;
+    }
+
+    @Override
+    public List<Booking> getBookingHistoryForId(Long id) {
+        // TODO Auto-generated method stub
+        return bookingRepository.findBookingHistoryForId(id);
     }
     
 }
