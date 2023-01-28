@@ -18,28 +18,18 @@ import javax.persistence.TemporalType;
 @Table(name = "bookings")
 public class Booking {
 
-	public Booking() {
-	}
-	
-	
-	public Booking(int seatNumber) {
-        this.seatNumber = seatNumber;
-    }
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "booking_ID")
 	private Long id;
 
-	
-	@Column(name = "seatNumber")
+	@Column(name = "seat_number")
 	private int seatNumber;
 
 	@Column(name = "purchased_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date purchasedTime;
 
-	@Column(name = "bookingStatus")
+	@Column(name = "status")
 	private String bookingStatus;
 
 	@Column(name = "final_price")
@@ -52,16 +42,13 @@ public class Booking {
 	@ManyToOne
     @JoinColumn(name = "purchased_by")
     private User user;
+
+	public Booking() {
+	}
 	
-    public User getUser() {
-		return user;
-	}
-
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
+	public Booking(int seatNumber) {
+        this.seatNumber = seatNumber;
+    }
 
 	public Long getId() {
 		return id;
@@ -71,7 +58,6 @@ public class Booking {
 		this.id = id;
 	}
 
-
 	public int getSeatNumber() {
 		return seatNumber;
 	}
@@ -79,7 +65,6 @@ public class Booking {
 	public void setSeatNumber(int seatNumber) {
 		this.seatNumber = seatNumber;
 	}
-
 
 	public Date getPurchasedTime() {
 		return purchasedTime;
@@ -89,41 +74,36 @@ public class Booking {
 		this.purchasedTime = purchasedTime;
 	}
 
-
-
-
-
 	public float getFinalPrice() {
 		return finalPrice;
 	}
-
 
 	public void setFinalPrice(float finalPrice) {
 		this.finalPrice = finalPrice;
 	}
 
-
 	public String getBookingStatus() {
 		return bookingStatus;
 	}
-
 
 	public void setBookingStatus(String bookingStatus) {
 		this.bookingStatus = bookingStatus;
 	}
 
-
 	public Trip getTrip() {
 		return trip;
 	}
-
 
 	public void setTrip(Trip trip) {
 		this.trip = trip;
 	}
 
+	public User getUser() {
+		return user;
+	}
 
-
-
+	public void setUser(User user) {
+		this.user = user;
+	}
 }
 

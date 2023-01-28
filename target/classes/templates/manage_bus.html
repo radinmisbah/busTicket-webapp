@@ -14,6 +14,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 	<style type="text/css">
 		body {
+			background-color: #f2f2f2;
 			font-family: 'Poppins',sans-serif;
 		}
 		.navbar-container {
@@ -35,7 +36,15 @@
 		}
 
 		.container {
-			padding-top: 20px;
+			padding:30px 15px;
+			background-color: #ffffff;
+			margin-top: 30px;
+			margin-bottom: 30px;
+			box-shadow:0 5px 10px 0 rgba(0,0,0,.1);
+		}
+
+		.container h1 {
+			margin-bottom: 20px;
 		}
 	</style>
 </head>
@@ -93,7 +102,7 @@
 		</div>
 	</nav>
 	
-	<div class="container my-2">
+	<div class="container">
 	<h1>Bus List</h1>
 	
 	<a th:href = "@{/showAddBusForm}" class="btn btn-primary btn-sm mb-3"> Add New Bus Service </a>

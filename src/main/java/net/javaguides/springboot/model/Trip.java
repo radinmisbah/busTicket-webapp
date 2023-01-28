@@ -4,7 +4,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,10 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
-
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -31,10 +27,7 @@ public class Trip {
     
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "trip_ID")
 	private Long id;
-
-	
 
 	@Column(name = "departure")
 	private String departure;
@@ -42,37 +35,31 @@ public class Trip {
 	@Column(name = "arrival")
 	private String arrival;
 
-    @Column(name = "departureDate")
+    @Column(name = "departure_date")
     @Temporal (TemporalType.DATE)
 	private  Date departureDate;
 
-    @Column(name = "departureTime")
+    @Column(name = "departure_time")
 	private  LocalTime departureTime;
 	
-	@Column(name = "maxSeat")
+	@Column(name = "max_seat")
 	private int maxSeat;
 	
 	@Column(name = "price")
     @NumberFormat(pattern = "#,###.00")
 	private float price;
 
-    @Column(name = "tripStatus")
+    @Column(name = "status")
 	private String tripStatus;
 	
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "trip_ID", referencedColumnName = "trip_ID")
+    @JoinColumn(name = "trip_id", referencedColumnName = "id")
     private List<Booking> Bookings = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "bus_id")
     private Bus bus;
 
-    public Bus getBus() {
-        return bus;
-    }
-    public void setBus(Bus bus) {
-        this.bus = bus;
-    }
     public Trip(){
 
     }
@@ -91,7 +78,6 @@ public class Trip {
     public void setId(Long id) {
         this.id = id;
     }
-
 
     public String getDeparture() {
         return departure;
@@ -132,22 +118,28 @@ public class Trip {
     public void setDepartureTime(LocalTime departureTime) {
         this.departureTime = departureTime;
     }
+
     public Date getDepartureDate() {
         return departureDate;
     }
+
     public void setDepartureDate(Date departureDate) {
         this.departureDate = departureDate;
     }
-  
-
 
     public String getTripStatus() {
         return tripStatus;
     }
+
     public void setTripStatus(String tripStatus) {
         this.tripStatus = tripStatus;
     }
 
-    
+    public Bus getBus() {
+        return bus;
+    }
 
+    public void setBus(Bus bus) {
+        this.bus = bus;
+    }
 }

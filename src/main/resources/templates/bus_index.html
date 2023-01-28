@@ -47,13 +47,27 @@
 			margin-bottom: 20px;
 		}
 
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
 		.input-container label {
-			margin-right: 5px;
 			font-size: 16px;
 			font-weight: 500;
+            margin-bottom: 10px;
 		}
 
 		.input-container input {
+			background-color: #eee;
+			border-radius: 3px;
+			padding: 0 10px;
+			font-size: 14px;
+			font-weight: 300;
+		}
+
+        .input-container select {
 			background-color: #eee;
 			border-radius: 3px;
 			padding: 0 10px;
@@ -128,8 +142,8 @@
 						Manage Bus
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<li><a class="dropdown-item" th:href="@{/admin/buses}">All buses</a></li>
-						<li><a class="dropdown-item" th:href="@{/admin/buses?register}">Register new bus</a></li>
+						<li><a class="dropdown-item" href="#">All buses</a></li>
+						<li><a class="dropdown-item" href="#">Register new bus</a></li>
 					</ul>
 				</li>
 				<li class="nav-item dropdown">
@@ -160,47 +174,72 @@
 	
 	<div class="container">
 		<div class="d-flex justify-content-between my-3">
-			<h3>Manage Company</h3>
+			<h3>Manage Bus</h3>
 	
 			<div>
 				<!-- Button trigger modal -->
-				<button type="button" id="modalToggleButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerCompanyModal">
-					Register company
+				<button type="button" id="modalToggleButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerBusModal">
+					Register bus
 				</button>  
 			</div>
 		</div>
+
 		<table class = "table table-striped table-responsive-md">
 			<thead class="thead-dark">
 				<tr>
 					<th>ID No.</th>
-					<th>Name</th>
+					<th>Driver Name</th>
+					<th>Registration Number (Plate Number)</th>
+					<th>Company</th>
 					<th> Actions </th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:if="${#lists.isEmpty(companyList)}"><td colspan="3" class="text-center">No records found.</td></tr>
-				<tr th:each="companyInstance : ${companyList}">
-					<td th:text="${companyInstance.id}" width="150"></td>
-					<td th:text="${companyInstance.name}"></td>
+				<tr th:if="${#lists.isEmpty(registeredBuses)}"><td colspan="5" class="text-center">No records found.</td></tr>
+				<tr th:each="registeredBus : ${registeredBuses}">
+					<td th:text="${registeredBus.id}" width="150"></td>
+					<td th:text="${registeredBus.driverName}"></td>
+					<td th:text="${registeredBus.regNumber}"></td>
+					<td th:text="${registeredBus.company.name}"></td>
                     <td width="200"> 
-						<div class="modal fade" th:id="${'editModal' + companyInstance.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal fade" th:id="${'editModal' + registeredBus.id}" tabindex="-1" aria-hidden="true">
 							<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 							<div class="modal-content">
 								<div class="modal-header">
 									<h1 class="modal-title fs-5" id="exampleModalLabel">Edit company</h1>
 									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 								</div>
-								<form th:action="@{/admin/companies/save}" method="POST" th:object="${companyInstance}">
+								<form th:action="@{/admin/buses/save}" method="POST" th:object="${registeredBus}">
 									<div class="modal-body">
 										<div class="input-container">
-											<label>Company Name</label>
 											<input name="id" type="hidden" th:value="*{id}" /> 
-											<input 
-												name="name"
-												type="text" 
-												th:value="*{name}"
-												required 
-												autofocus="autofocus" />
+											<div class="input-container">
+                                                <label for="name">Driver Name</label>
+                                                <input 
+                                                    name="driverName" 
+                                                    type="text" 
+                                                    th:value="*{driverName}"
+                                                    required 
+                                                    autofocus="autofocus" />
+                                            </div>	
+                                            <div class="input-container">
+                                                <label for="name">Registration Number</label>
+                                                <input 
+                                                    name="regNumber" 
+                                                    type="text" 
+                                                    th:value="*{regNumber}"
+                                                    required 
+                                                    autofocus="autofocus" />
+                                            </div>
+                                            <div class="input-container">
+                                                <label for="name">Company</label>
+                                                <select
+                                                    name="company"
+                                                    th:value="*{company}"
+                                                    required >
+                                                    <option th:each="company : ${companies}" th:value="${company.id}" th:text="${company.name}" th:selected="${registeredBus.company.id == company.id}"></option>
+                                                </select>
+                                            </div>
 										</div>	
 									</div>
 									<div class="modal-footer">
@@ -212,10 +251,10 @@
 							</div>
 						</div>
 
-						<button type="button" th:id="${'editModalOpenButton' + companyInstance.id}" class="btn btn-primary btn-sm" data-bs-toggle="modal" th:data-bs-target="${'#editModal' + companyInstance.id}">
+						<button type="button" th:id="${'editModalOpenButton' + registeredBus.id}" class="btn btn-primary btn-sm" data-bs-toggle="modal" th:data-bs-target="${'#editModal' + registeredBus.id}">
 							Edit
 						</button>
-					    <a th:href="@{/admin/companies/{id}/delete(id=${companyInstance.id})}" class="btn btn-danger btn-sm">Delete</a>
+					    <a th:href="@{/admin/buses/{id}/delete(id=${registeredBus.id})}" class="btn btn-danger btn-sm">Delete</a>
 					</td>
 
 					
@@ -248,24 +287,42 @@
 	</div>
 
 	<!-- Modal -->
-	<div class="modal fade" id="registerCompanyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal fade" id="registerBusModal" tabindex="-1" aria-labelledby="registerBusModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="exampleModalLabel">New Company</h1>
+				<h1 class="modal-title fs-5" id="exampleModalLabel">New Bus</h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<form th:action="@{/admin/companies/save}" method="POST" th:object="${company}">
+			<form th:action="@{/admin/buses/save}" method="POST" th:object="${bus}">
 				<div class="modal-body">
 					<div class="input-container">
-						<label for="name">Company Name</label>
+						<label for="name">Driver Name</label>
 						<input 
-							id="name" 
+							id="driver_name" 
 							type="text" 
-							th:field="*{name}"
+							th:field="*{driverName}"
 							required 
 							autofocus="autofocus" />
 					</div>	
+					<div class="input-container">
+						<label for="name">Registration Number</label>
+						<input 
+							id="reg_number" 
+							type="text" 
+							th:field="*{regNumber}"
+							required 
+							autofocus="autofocus" />
+					</div>
+                    <div class="input-container">
+						<label for="name">Company</label>
+						<select
+							id="company" 
+                            th:field="*{company}"
+							required >
+                            <option th:each="company : ${companies}" th:value="${company.id}" th:text="${company.name}"></option>
+                        </select>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
