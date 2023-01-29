@@ -18,7 +18,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<Booking> getAllBooking() {
-        // TODO Auto-generated method stub
+        
         return bookingRepository.findAll();
     }
 
@@ -30,7 +30,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public int countUnavailableByTripId(Long id) {
-        // TODO Auto-generated method stub
+        
         return bookingRepository.countByTripIdAndPaid(id);
     }
 
@@ -49,13 +49,13 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<Booking> getAllBookingByUser(Long id) {
-        // TODO Auto-generated method stub
+        
         return bookingRepository.findAllByPurchasedBy(id);
     }
 
     @Override
     public Booking getById(Long id) {
-        // TODO Auto-generated method stub
+        
         Optional<Booking> optional = bookingRepository.findById(id);
 		Booking ticket = null;
 		if (optional.isPresent()) {
@@ -68,7 +68,7 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public List<Booking> getBookingHistoryForId(Long id) {
-        // TODO Auto-generated method stub
+        
         return bookingRepository.findBookingHistoryForId(id);
     }
     
