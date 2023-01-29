@@ -9,9 +9,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.util.concurrent.CompletableFuture;
 
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 @Service
