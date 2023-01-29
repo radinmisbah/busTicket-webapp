@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -48,6 +50,8 @@ public class PassengerController {
 	@Autowired
 	private QrCodeService qrCodeService;
 
+	@Autowired
+    private AsyncTaskExecutor taskExecutor;
 
 
     @PreAuthorize("hasRole('ROLE_USER')")
@@ -154,17 +158,19 @@ public class PassengerController {
 		return "booking_history";
 	}
 
-	@GetMapping("/user/testQR/{id}")
-	
-	public String testCreateQR(@PathVariable ( value = "id") long id, Model model) {
+	@GetMapping("/user/generateQR/{id}")
+	public String createQR(@PathVariable ( value = "id") long id, Model model){
        
 		Booking booking = bookingService.getById(id);
 		String message = booking.getQrCode();
-		qrCodeService.createQr(message).join();
-        model.addAttribute("qrCodeImage", "tempTicketQR.png");
-      
-		return "view_QR";
+		
+		qrCodeService.createQr(message);
+		
+		return "redirect:/user/viewTicket/"+id;
 	}
-    
+
+	
+
+
     
 }

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import net.javaguides.springboot.model.Booking;
@@ -18,7 +19,7 @@ import net.javaguides.springboot.service.BookingService;
 public class BookingController {
 
     @Autowired
-    private BookingService BookingService;
+    private BookingService bookingService;
 
     @Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -28,7 +29,7 @@ public class BookingController {
     public String viewHomePage (Model model){
             
         
-        model.addAttribute("listBooking", BookingService.getAllBooking());
+        model.addAttribute("listBooking", bookingService.getAllBooking());
         return "index";
     }
 
@@ -51,15 +52,17 @@ public class BookingController {
         booking.setQrCode(passwordEncoder.encode(booking.toString()));
 
         //save ticket to database
-        BookingService.saveTicket(booking);
-        
+        bookingService.saveTicket(booking);
+
         return "redirect:/user/myBooking";
     }
 
-    @GetMapping("/user/viewTicket")
-    public String viewTicket (Model model){
+    @GetMapping("/user/viewTicket/{id}")
+    public String viewTicket (@PathVariable ( value = "id") long id, Model model){
             
-    
+        Booking booking = bookingService.getById(id);
+        model.addAttribute("booking", booking);
+
         return "show_book";
     }
 

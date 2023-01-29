@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class QrCodeService {
     private static final String QR_CODE_IMAGE_PATH = "src/main/resources/static/tempTicketQR.png";
 
-    public static void generateQRCodeImage(String text, int width, int height, String filePath)
+    private static synchronized void generateQRCodeImage(String text, int width, int height, String filePath)
             throws WriterException, IOException {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
         BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
@@ -27,20 +27,14 @@ public class QrCodeService {
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
             }
 
-
-        @Async    
-        public CompletableFuture<Void>  createQr(String message){
+        public synchronized void  createQr(String message){
             try {
                 generateQRCodeImage(message, 350, 350, QR_CODE_IMAGE_PATH);
-                return CompletableFuture.completedFuture(null);
               
             } catch (WriterException e) {
-                System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());
-                return CompletableFuture.completedFuture(null);
+                System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());           
             } catch (IOException e) {
                 System.out.println(e);
-                return CompletableFuture.completedFuture(null);
-                
             }
         }
 
