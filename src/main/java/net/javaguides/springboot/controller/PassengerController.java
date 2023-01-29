@@ -154,11 +154,13 @@ public class PassengerController {
 		return "booking_history";
 	}
 
-	@GetMapping("/user/testQR")
+	@GetMapping("/user/testQR/{id}")
 	
-	public String testCreateQR(Model model) {
+	public String testCreateQR(@PathVariable ( value = "id") long id, Model model) {
        
-		qrCodeService.createQr().join();
+		Booking booking = bookingService.getById(id);
+		String message = booking.getQrCode();
+		qrCodeService.createQr(message).join();
         model.addAttribute("qrCodeImage", "tempTicketQR.png");
       
 		return "view_QR";

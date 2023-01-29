@@ -9,12 +9,9 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.util.Random;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Future;
 
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,9 +29,8 @@ public class QrCodeService {
 
 
         @Async    
-        public CompletableFuture<Void>  createQr(){
+        public CompletableFuture<Void>  createQr(String message){
             try {
-                String message = "$2a$10$kzrQS3htME0yryzjTuP.zuLvhqqYoYIPA157QHhqtKAH984zrUDC";
                 generateQRCodeImage(message, 350, 350, QR_CODE_IMAGE_PATH);
                 return CompletableFuture.completedFuture(null);
               

@@ -52,8 +52,21 @@ public class Booking {
 	@ManyToOne
     @JoinColumn(name = "purchased_by")
     private User user;
+
+	@Column(name = "qr_code")
+	private String qrCode;
 	
-    public User getUser() {
+    public String getQrCode() {
+		return qrCode;
+	}
+
+
+	public void setQrCode(String qrCode) {
+		this.qrCode = qrCode;
+	}
+
+
+	public User getUser() {
 		return user;
 	}
 

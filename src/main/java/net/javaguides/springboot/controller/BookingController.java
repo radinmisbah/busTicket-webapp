@@ -48,11 +48,11 @@ public class BookingController {
         
         booking.setBookingStatus("Paid");
 
+        booking.setQrCode(passwordEncoder.encode(booking.toString()));
 
-      
-        System.out.println("Secret code:"+passwordEncoder.encode(booking.toString()));
         //save ticket to database
         BookingService.saveTicket(booking);
+        
         return "redirect:/user/myBooking";
     }
 
