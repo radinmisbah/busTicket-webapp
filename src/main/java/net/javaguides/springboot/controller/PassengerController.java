@@ -9,10 +9,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,6 +47,9 @@ public class PassengerController {
 
 	@Autowired
 	private QrCodeService qrCodeService;
+
+	@Autowired
+    private AsyncTaskExecutor asyncTaskExecutor;
 
     @PreAuthorize("hasRole('ROLE_USER')")
     //redirect to form to search new bus
@@ -149,20 +156,14 @@ public class PassengerController {
 	}
 
 	@GetMapping("/user/testQR")
+	
 	public String testCreateQR(Model model) {
- 
-		qrCodeService.createQr();
-		
-		return "redirect:/";
+       
+		qrCodeService.createQr().join();
+        model.addAttribute("qrCodeImage", "tempTicketQR.png");
+      
+		return "view_QR";
 	}
-
-
-
-
-
-
-
-
     
     
 }
