@@ -1,18 +1,15 @@
 package net.javaguides.springboot.controller;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import net.javaguides.springboot.model.Booking;
-import net.javaguides.springboot.model.Trip;
-import net.javaguides.springboot.model.User;
 import net.javaguides.springboot.service.BookingService;
 
 
@@ -23,6 +20,8 @@ public class BookingController {
     @Autowired
     private BookingService BookingService;
 
+    @Autowired
+	private BCryptPasswordEncoder passwordEncoder;
     
     //display list of sold ticket
     @GetMapping("/view")
@@ -48,6 +47,10 @@ public class BookingController {
 
         
         booking.setBookingStatus("Paid");
+
+
+      
+        System.out.println("Secret code:"+passwordEncoder.encode(booking.toString()));
         //save ticket to database
         BookingService.saveTicket(booking);
         return "redirect:/user/myBooking";

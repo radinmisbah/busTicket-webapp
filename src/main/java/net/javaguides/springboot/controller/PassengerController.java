@@ -48,8 +48,7 @@ public class PassengerController {
 	@Autowired
 	private QrCodeService qrCodeService;
 
-	@Autowired
-    private AsyncTaskExecutor asyncTaskExecutor;
+
 
     @PreAuthorize("hasRole('ROLE_USER')")
     //redirect to form to search new bus

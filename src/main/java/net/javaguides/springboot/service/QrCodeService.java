@@ -34,10 +34,8 @@ public class QrCodeService {
         @Async    
         public CompletableFuture<Void>  createQr(){
             try {
-                Random rand = new Random();
-                int randomNum = rand.nextInt();
-                String randomNumString = Integer.toString(randomNum);
-                generateQRCodeImage(randomNumString, 350, 350, QR_CODE_IMAGE_PATH);
+                String message = "$2a$10$kzrQS3htME0yryzjTuP.zuLvhqqYoYIPA157QHhqtKAH984zrUDC";
+                generateQRCodeImage(message, 350, 350, QR_CODE_IMAGE_PATH);
                 return CompletableFuture.completedFuture(null);
               
             } catch (WriterException e) {
@@ -50,7 +48,7 @@ public class QrCodeService {
             }
         }
 
-        
+
 }
 
 
