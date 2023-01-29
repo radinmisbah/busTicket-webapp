@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Bus Management System</title>
+
+	<link 
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
+		integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+	<script 
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+	</script>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+	<style type="text/css">
+		body {
+			background-color: #f2f2f2;
+			font-family: 'Poppins',sans-serif;
+		}
+		.navbar-container {
+			background-color: #ff5c3f;
+		}
+
+		.navbar-container .navbar-brand{
+			color: #ffffff;
+		}
+
+		.navbar-container .nav-link{
+			color: #ffffff;
+		}
+
+		.navbar-container .nav-btn {
+			background-color: #ffffff;
+			color: #000000;
+			border-radius: 5px;
+		}
+
+		.container {
+			padding:30px 15px;
+			background-color: #ffffff;
+			margin-top: 30px;
+			margin-bottom: 30px;
+			box-shadow:0 5px 10px 0 rgba(0,0,0,.1);
+		}
+
+		.container h1 {
+			margin-bottom: 20px;
+		}
+
+		.input-container label {
+			margin-right: 5px;
+			font-size: 16px;
+			font-weight: 500;
+		}
+
+		.input-container input {
+			background-color: #eee;
+			border-radius: 3px;
+			padding: 0 10px;
+			font-size: 14px;
+			font-weight: 300;
+		}
+
+		.table-wrap {
+			overflow-x: scroll; 
+		}
+
+		.table {
+			width: 100%;
+			border-collapse: separate;
+			border-spacing: 0 10px; 
+		}
+
+		.table thead th {
+			border: none;
+			padding: 15px;
+			font-size: 14px;
+			color: #fff; 
+		}
+
+		.table tbody tr {
+			margin-bottom: 10px;
+			-webkit-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+			-moz-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+			box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29); 
+		}
+
+		.table tbody th, .table tbody td {
+			border: none;
+			padding: 15px;
+			font-size: 14px;
+			background: #fff; 
+		}
+
+		.table tbody td .close span {
+			font-size: 12px;
+			color: #dc3545; 
+		}
+
+		.table .thead-dark th {
+			color: #fff;
+			background-color: #343a40;
+			border-color: #454d55; 
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar-container navbar navbar-expand-lg p-3">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Bus Ticketing System</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class=" collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="navbar-nav ms-auto ">
+				<li class="nav-item dropdown">
+					<a class="nav-link mx-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Manage Company
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<li><a class="dropdown-item" th:href="@{/admin/companies}">All companies</a></li>
+						<li><a class="dropdown-item" th:href="@{/admin/companies?register}">Register new company</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link mx-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Manage Bus
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<li><a class="dropdown-item" th:href="@{/admin/buses}">All buses</a></li>
+						<li><a class="dropdown-item" th:href="@{/admin/buses?register}">Register new bus</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link mx-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Manage Trip
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<li><a class="dropdown-item" th:href="@{/admin/trips}">All trips</a></li>
+						<li><a class="dropdown-item" th:href = "@{/admin/trips?register}">Register new trip</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link mx-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Manage Administrator
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<li><a class="dropdown-item" th:href="@{/admin/administrator}">All administrators</a></li>
+						<li><a class="dropdown-item" th:href="@{/admin/administrator?register}">Register new administrator</a></li>
+					</ul>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link mx-2 nav-btn" th:href="@{/logout}">Logout</a>
+				</li>
+			</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<div class="container">
+		<div class="d-flex justify-content-between my-3">
+			<h3>Manage Company</h3>
+	
+			<div>
+				<!-- Button trigger modal -->
+				<button type="button" id="modalToggleButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerCompanyModal">
+					Register administrator
+				</button>  
+			</div>
+		</div>
+		<table class = "table table-striped table-responsive-md">
+			<thead class="thead-dark">
+				<tr>
+					<th>ID No.</th>
+					<th>Name</th>
+					<th> Actions </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${#lists.isEmpty(adminList)}"><td colspan="3" class="text-center">No records found.</td></tr>
+				<tr th:each="admin : ${adminList}">
+					<td th:text="${admin.id}" width="150"></td>
+					<td th:text="${admin.firstName}"></td>
+                    <td width="200"> 
+						<div class="modal fade" th:id="${'editModal' + admin.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="exampleModalLabel">Edit adminstrator</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<form th:action="@{/admin/companies/save}" method="POST" th:object="${admin}">
+									<div class="modal-body">
+										<div class="input-container">
+											<label>Company Name</label>
+											<input name="id" type="hidden" th:value="*{id}" /> 
+											<input 
+												name="firstName"
+												type="text" 
+												th:value="*{firstName}"
+												required 
+												autofocus="autofocus" />
+										</div>	
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-primary">Save</button>
+									</div>
+								</form>
+							</div>
+							</div>
+						</div>
+
+						<button type="button" th:id="${'editModalOpenButton' + admin.id}" class="btn btn-primary btn-sm" data-bs-toggle="modal" th:data-bs-target="${'#editModal' + admin.id}">
+							Edit
+						</button>
+					    <a th:href="@{/admin/companies/{id}/delete(id=${admin.id})}" class="btn btn-danger btn-sm">Delete</a>
+					</td>
+
+					
+				</tr>
+			</tbody>
+		</table>
+		
+		<div th:if = "${totalPages > 1}">
+			<div class = "row col-sm-10">
+				<div class = "col-sm-2">
+					Total Rows: [[${totalItems}]] 
+				</div>
+				<div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/admin/companies/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+				</div>
+				<div class = "col-sm-1">
+					<a th:if="${currentPage < totalPages}" th:href="@{'/admin/companies/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+					<span th:unless="${currentPage < totalPages}">Next</span>
+				</div>
+				
+				 <div class="col-sm-1">
+    				<a th:if="${currentPage < totalPages}" th:href="@{'/admin/companies/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+					<span th:unless="${currentPage < totalPages}">Last</span>
+   				 </div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="registerCompanyModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">New Administrator</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<form th:action="@{/admin/administrator/save}" method="POST" th:object="${newAdmin}">
+				<div class="modal-body">
+					<div class="input-container">
+						<label for="name">Name</label>
+						<input 
+							id="name" 
+							type="text" 
+							th:field="*{firstName}"
+							required 
+							autofocus="autofocus" />
+					</div>	
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Register</button>
+				</div>
+			</form>
+		</div>
+		</div>
+	</div>
+
+	<div th:if="${param.register}">
+		<script>
+			const registerModalButton = document.getElementById('modalToggleButton');
+
+			registerModalButton.click();
+		</script>
+	</div>
+</body>
+</html>
