@@ -71,5 +71,10 @@ public class BookingServiceImpl implements BookingService {
         // TODO Auto-generated method stub
         return bookingRepository.findBookingHistoryForId(id);
     }
+
+    @Override
+    public Booking getByQrCode(String qr) {
+        return bookingRepository.findByQrCode(qr);
+    }
     
 }

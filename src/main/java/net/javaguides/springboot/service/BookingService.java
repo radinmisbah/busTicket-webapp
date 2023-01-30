@@ -14,4 +14,5 @@ public interface BookingService {
     List<Booking> getAllBookingByUser(Long id);
     Booking getById(Long id);
     List<Booking> getBookingHistoryForId(Long id);
+    Booking getByQrCode(String qr);
 }

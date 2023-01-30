@@ -8,13 +8,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import net.javaguides.springboot.model.Booking;
 import net.javaguides.springboot.model.User;
+import net.javaguides.springboot.service.BookingService;
 import net.javaguides.springboot.service.UserService;
 
 @Controller
 public class AdminController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BookingService bookingService;
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/admin/administrator")
@@ -43,8 +49,26 @@ public class AdminController {
         return "administrator_index";
     }
 
-    @GetMapping("admin/scanticket")
+    @GetMapping("/admin/scanticket")
     public String showQrScanner() {
         return "scan_qr_index";
+    }
+
+    @GetMapping("admin/verifyticket/{qr}")
+    public String verifyTicketQr(@PathVariable (value = "qr") String qrValue) {
+        Booking booking = bookingService.getByQrCode(qrValue);
+
+        if(booking != null) {
+            if(!booking.getBookingStatus().equalsIgnoreCase("Onboarded")) {
+                booking.setBookingStatus("Onboarded");
+                bookingService.saveTicket(booking);
+                
+                return "redirect:/admin/scanticket?success";
+            }
+
+            return "redirect:/admin/scanticket?already";
+        }
+
+        return "redirect:/admin/scanticket?error";
     }
 }

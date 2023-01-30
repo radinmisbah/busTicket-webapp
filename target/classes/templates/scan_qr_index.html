@@ -168,9 +168,21 @@
 			<h3>Scan Ticket</h3>
 		</div>
 
-        <div>
-            <a class="button" id="startButton">Start</a>
-            <a class="button" id="resetButton">Reset</a>
+        <div th:if="${param.error}">
+            <div class="alert alert-danger">Failed to scanned.</div>
+        </div>
+
+        <div th:if="${param.success}">
+            <div class="alert alert-info">Ticket is scanned.</div>
+        </div>
+
+        <div th:if="${param.already}">
+            <div class="alert alert-info">Ticket is already scanned.</div>
+        </div>
+
+        <div class="mb-3">
+            <a class="button btn btn-primary" id="startButton">Start</a>
+            <a class="button btn btn-secondary" id="resetButton">Reset</a>
           </div>
     
           <div>
@@ -201,6 +213,7 @@
         codeReader.decodeFromInputVideoDevice(selectedDeviceId, 'video').then((result) => {
           console.log(result)
           document.getElementById('result').textContent = result.text
+          window.location.replace("/admin/verifyticket/" + result.text)
         }).catch((err) => {
           console.error(err)
           document.getElementById('result').textContent = err

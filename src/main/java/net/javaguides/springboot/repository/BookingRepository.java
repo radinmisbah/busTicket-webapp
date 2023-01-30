@@ -19,4 +19,6 @@ public interface BookingRepository extends JpaRepository <Booking, Long>   {
 
     @Query(value = "SELECT * FROM bookings WHERE purchased_by = :userId AND status != 'Paid'", nativeQuery = true)
     public List<Booking> findBookingHistoryForId(@Param("userId") Long userId);
+
+    public Booking findByQrCode(@Param("qr") String qr);
 }
