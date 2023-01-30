@@ -42,4 +42,9 @@ public class AdminController {
         
         return "administrator_index";
     }
+
+    @GetMapping("admin/scanticket")
+    public String showQrScanner() {
+        return "scan_qr_index";
+    }
 }

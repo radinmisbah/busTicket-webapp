@@ -44,7 +44,7 @@ public class BookingController {
         booking.setQrCode(passwordEncoder.encode(booking.toString()));
 
         //save ticket to database
-        bookingService.saveTicket(booking);
+        BookingService.saveTicket(booking);
 
         return "redirect:/user/myBooking";
     }
@@ -56,14 +56,5 @@ public class BookingController {
         model.addAttribute("booking", booking);
 
         return "show_book";
-    }
-
-
-    
-    
-
-
-
-
-   
+    }   
 }
