@@ -142,8 +142,8 @@
 						Manage Bus
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<li><a class="dropdown-item" href="#">All buses</a></li>
-						<li><a class="dropdown-item" href="#">Register new bus</a></li>
+						<li><a class="dropdown-item" th:href="@{/admin/buses}">All buses</a></li>
+						<li><a class="dropdown-item" th:href="@{/admin/buses?register}">Register new bus</a></li>
 					</ul>
 				</li>
 				<li class="nav-item dropdown">
@@ -151,8 +151,8 @@
 						Manage Trip
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<li><a class="dropdown-item" th:href="@{/admin/viewManageBus}">All trips</a></li>
-						<li><a class="dropdown-item" th:href = "@{/showAddBusForm}">Register new trip</a></li>
+						<li><a class="dropdown-item" th:href="@{/admin/trips}">All trips</a></li>
+						<li><a class="dropdown-item" th:href = "@{/admin/trips?register}">Register new trip</a></li>
 					</ul>
 				</li>
 				<li class="nav-item dropdown">
@@ -160,8 +160,8 @@
 						Manage Administrator
 					</a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<li><a class="dropdown-item" href="#">All administrators</a></li>
-						<li><a class="dropdown-item" href="#">Register new administrator</a></li>
+						<li><a class="dropdown-item" th:href="@{/admin/administrator}">All administrators</a></li>
+						<li><a class="dropdown-item" th:href="@{/admin/administrator?register}">Register new administrator</a></li>
 					</ul>
 				</li>
 				<li class="nav-item">

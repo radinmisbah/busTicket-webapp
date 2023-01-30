@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Bus Management System</title>
+
+	<link 
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" 
+		integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+	<script 
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+	</script>
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+	<style type="text/css">
+		body {
+			background-color: #f2f2f2;
+			font-family: 'Poppins',sans-serif;
+		}
+		.navbar-container {
+			background-color: #ff5c3f;
+		}
+
+		.navbar-container .navbar-brand{
+			color: #ffffff;
+		}
+
+		.navbar-container .nav-link{
+			color: #ffffff;
+		}
+
+		.navbar-container .nav-btn {
+			background-color: #ffffff;
+			color: #000000;
+			border-radius: 5px;
+		}
+
+		.container {
+			padding:30px 15px;
+			background-color: #ffffff;
+			margin-top: 30px;
+			margin-bottom: 30px;
+			box-shadow:0 5px 10px 0 rgba(0,0,0,.1);
+		}
+
+		.container h1 {
+			margin-bottom: 20px;
+		}
+
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+
+		.input-container label {
+			font-size: 16px;
+			font-weight: 500;
+            margin-bottom: 10px;
+		}
+
+		.input-container input {
+			background-color: #eee;
+			border-radius: 3px;
+			padding: 0 10px;
+			font-size: 14px;
+			font-weight: 300;
+		}
+
+        .input-container select {
+			background-color: #eee;
+			border-radius: 3px;
+			padding: 0 10px;
+			font-size: 14px;
+			font-weight: 300;
+		}
+
+		.table-wrap {
+			overflow-x: scroll; 
+		}
+
+		.table {
+			width: 100%;
+			border-collapse: separate;
+			border-spacing: 0 10px; 
+		}
+
+		.table thead th {
+			border: none;
+			padding: 15px;
+			font-size: 14px;
+			color: #fff; 
+		}
+
+		.table tbody tr {
+			margin-bottom: 10px;
+			-webkit-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+			-moz-box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29);
+			box-shadow: 0px 5px 12px -12px rgba(0, 0, 0, 0.29); 
+		}
+
+		.table tbody th, .table tbody td {
+			border: none;
+			padding: 15px;
+			font-size: 14px;
+			background: #fff; 
+		}
+
+		.table tbody td .close span {
+			font-size: 12px;
+			color: #dc3545; 
+		}
+
+		.table .thead-dark th {
+			color: #fff;
+			background-color: #343a40;
+			border-color: #454d55; 
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar-container navbar navbar-expand-lg p-3">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">Bus Ticketing System</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class=" collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="navbar-nav ms-auto ">
+				<li class="nav-item dropdown">
+					<a class="nav-link mx-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Manage Company
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<li><a class="dropdown-item" th:href="@{/admin/companies}">All companies</a></li>
+						<li><a class="dropdown-item" th:href="@{/admin/companies?register}">Register new company</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link mx-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Manage Bus
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<li><a class="dropdown-item" th:href="@{/admin/buses}">All buses</a></li>
+						<li><a class="dropdown-item" th:href="@{/admin/buses?register}">Register new bus</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link mx-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Manage Trip
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<li><a class="dropdown-item" th:href="@{/admin/trips}">All trips</a></li>
+						<li><a class="dropdown-item" th:href = "@{/admin/trips?register}">Register new trip</a></li>
+					</ul>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link mx-2 dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Manage Administrator
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<li><a class="dropdown-item" th:href="@{/admin/administrator}">All administrators</a></li>
+						<li><a class="dropdown-item" th:href="@{/admin/administrator?register}">Register new administrator</a></li>
+					</ul>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link mx-2 nav-btn" th:href="@{/logout}">Logout</a>
+				</li>
+			</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<div class="container">
+		<div class="d-flex justify-content-between my-3">
+			<h3>Manage Trip</h3>
+	
+			<div>
+				<!-- Button trigger modal -->
+				<button type="button" id="modalToggleButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerBusModal">
+					Register trip
+				</button>  
+			</div>
+		</div>
+
+		<table class = "table table-striped table-responsive-md">
+			<thead class="thead-dark">
+				<tr>
+					<th>ID No.</th>
+					<th>Departure</th>
+					<th>Arrival</th>
+					<th class="text-center">Date</th>
+					<th class="text-center">Time</th>
+					<th class="text-end">Max Seat</th>
+					<th class="text-end">Price</th>
+					<th class="text-center">Status</th>
+					<th>Bus</th>
+					<th> Actions </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${#lists.isEmpty(tripList)}"><td colspan="10" class="text-center">No records found.</td></tr>
+				<tr th:each="list : ${tripList}">
+					<td th:text="${list.id}" width="80"></td>
+					<td th:text="${list.departure}"></td>
+					<td th:text="${list.arrival}"></td>
+					<td th:text="${#dates.format(list.departureDate, 'dd/MM/yyyy')}" class="text-center"></td>
+					<td th:text="${list.departureTime}" class="text-center"></td>
+					<td th:text="${list.maxSeat}" class="text-end"></td>
+					<td th:text="${list.price}" class="text-end"></td>
+					<td th:text="${list.tripStatus}" class="text-center"></td>
+					<td th:if="${list.bus != null}" th:text="${list.bus.regNumber}" data-bs-toggle="tooltip" data-bs-placement="bottom" th:title="${list.bus.company.name + ' - ' + list.bus.driverName}"></td>
+					<td th:if="${list.bus == null}" th:text="${'Not Available'}"></td>
+                    <td width="145"> 
+						<div class="modal fade" th:id="${'editModal' + list.id}" tabindex="-1" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5">Edit trip</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<form th:action="@{/admin/trips/save}" method="POST" th:object="${list}">
+									<div class="modal-body">
+                                        <input name="id" type="hidden" th:value="*{id}" /> 
+                                        <div class="input-container">
+                                            <label for="departure">Departure</label>
+                                            <input 
+                                                name="departure" 
+                                                type="text" 
+                                                th:value="*{departure}"
+                                                required 
+                                                autofocus="autofocus" />
+                                        </div>	
+                                        <div class="input-container">
+                                            <label for="arrival">Arrival</label>
+                                            <input 
+                                                name="arrival" 
+                                                type="text" 
+                                                th:value="*{arrival}"
+                                                required 
+                                                autofocus="autofocus" />
+                                        </div>
+                                        <div class="input-container">
+                                            <label for="departure_date">Departure Date</label>
+                                            <input 
+                                                name="departureDate" 
+                                                type="date" 
+                                                th:value="*{#dates.format(departureDate, 'yyyy-MM-dd')}"
+                                                required 
+                                                autofocus="autofocus" />
+                                        </div>
+                                        <div class="input-container">
+                                            <label for="departure_time">Departure Time</label>
+                                            <input 
+                                                name="departureTime" 
+                                                type="time" 
+                                                th:value="*{departureTime}"
+                                                required 
+                                                autofocus="autofocus" />
+                                        </div>
+                                        <div class="input-container">
+                                            <label for="max_seat">Maximun Available Seat</label>
+                                            <input 
+                                                name="maxSeat" 
+                                                type="number" 
+                                                th:value="*{maxSeat}"
+                                                required 
+                                                autofocus="autofocus" />
+                                        </div>
+                                        <div class="input-container">
+                                            <label for="price">Ticket Price</label>
+                                            <input 
+                                                name="price" 
+                                                type="number" 
+                                                step="0.01"
+                                                th:value="*{price}"
+                                                required 
+                                                autofocus="autofocus" />
+                                        </div>
+                                        <div class="input-container">
+                                            <label for="status">Status</label>
+                                            <select
+                                                name="tripStatus" 
+                                                th:value="*{tripStatus}"
+                                                required >
+                                                <option value="On-schedule">On Schedule</option>
+                                                <option value="Delayed">Delayed</option>
+                                                <option value="Cancelled">Cancelled</option>
+                                            </select>
+                                        </div>
+                                        <div class="input-container">
+                                            <label for="bus">Bus</label>
+                                            <select
+                                                name="bus" 
+                                                th:value="*{bus}"
+                                                required >
+                                                <option th:each="bus : ${buses}" th:value="${bus.id}" th:text="${bus.company.name + ' - ' + bus.regNumber + ' (' + bus.driverName + ') '}"></option>
+                                            </select>
+                                        </div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+										<button type="submit" class="btn btn-primary">Save</button>
+									</div>
+								</form>
+							</div>
+							</div>
+						</div>
+
+						<button type="button" th:id="${'editModalOpenButton' + list.id}" class="btn btn-primary btn-sm" data-bs-toggle="modal" th:data-bs-target="${'#editModal' + list.id}">
+							Edit
+						</button>
+					    <a th:href="@{/admin/trips/{id}/delete(id=${list.id})}" class="btn btn-danger btn-sm">Delete</a>
+					</td>
+
+					
+				</tr>
+			</tbody>
+		</table>
+		
+		<div th:if = "${totalPages > 1}">
+			<div class = "row col-sm-10">
+				<div class = "col-sm-2">
+					Total Rows: [[${totalItems}]] 
+				</div>
+				<div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/admin/companies/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+				</div>
+				<div class = "col-sm-1">
+					<a th:if="${currentPage < totalPages}" th:href="@{'/admin/companies/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+					<span th:unless="${currentPage < totalPages}">Next</span>
+				</div>
+				
+				 <div class="col-sm-1">
+    				<a th:if="${currentPage < totalPages}" th:href="@{'/admin/companies/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+					<span th:unless="${currentPage < totalPages}">Last</span>
+   				 </div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="registerBusModal" tabindex="-1" aria-labelledby="registerBusModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h1 class="modal-title fs-5" id="exampleModalLabel">New Trip</h1>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<form th:action="@{/admin/trips/save}" method="POST" th:object="${newTrip}">
+				<div class="modal-body">
+					<div class="input-container">
+						<label for="departure">Departure</label>
+						<input 
+							id="departure" 
+							type="text" 
+							th:field="*{departure}"
+							required 
+							autofocus="autofocus" />
+					</div>	
+					<div class="input-container">
+						<label for="arrival">Arrival</label>
+						<input 
+							id="arrival" 
+							type="text" 
+							th:field="*{arrival}"
+							required 
+							autofocus="autofocus" />
+					</div>
+                    <div class="input-container">
+						<label for="departure_date">Departure Date</label>
+						<input 
+							id="departure_date" 
+							type="date" 
+							th:field="*{departureDate}"
+							required 
+							autofocus="autofocus" />
+					</div>
+                    <div class="input-container">
+						<label for="departure_time">Departure Time</label>
+						<input 
+							id="departure_time" 
+							type="time" 
+							th:field="*{departureTime}"
+							required 
+							autofocus="autofocus" />
+					</div>
+                    <div class="input-container">
+						<label for="max_seat">Maximun Available Seat</label>
+						<input 
+							id="max_seat" 
+							type="number" 
+							th:field="*{maxSeat}"
+							required 
+							autofocus="autofocus" />
+					</div>
+                    <div class="input-container">
+						<label for="price">Ticket Price</label>
+						<input 
+							id="price" 
+							type="number" 
+                            step="0.01"
+							th:field="*{price}"
+							required 
+							autofocus="autofocus" />
+					</div>
+                    <div class="input-container">
+						<label for="status">Status</label>
+						<select
+							id="status" 
+                            th:field="*{tripStatus}"
+							required >
+                            <option value="On-schedule">On Schedule</option>
+                            <option value="Delayed">Delayed</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+					</div>
+                    <div class="input-container">
+						<label for="bus">Bus</label>
+						<select
+							id="bus" 
+                            th:field="*{bus}"
+							required >
+                            <option th:each="bus : ${buses}" th:value="${bus.id}" th:text="${bus.company.name + ' - ' + bus.regNumber + ' (' + bus.driverName + ') '}"></option>
+                        </select>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Register</button>
+				</div>
+			</form>
+		</div>
+		</div>
+	</div>
+
+	<div th:if="${param.register}">
+		<script>
+			const registerModalButton = document.getElementById('modalToggleButton');
+
+			registerModalButton.click();
+		</script>
+	</div>
+</body>
+</html>

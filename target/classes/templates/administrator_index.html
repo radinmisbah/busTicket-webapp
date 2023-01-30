@@ -165,7 +165,7 @@
 			<div>
 				<!-- Button trigger modal -->
 				<button type="button" id="modalToggleButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerCompanyModal">
-					Register company
+					Register administrator
 				</button>  
 			</div>
 		</div>
@@ -178,27 +178,27 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:if="${#lists.isEmpty(companyList)}"><td colspan="3" class="text-center">No records found.</td></tr>
-				<tr th:each="companyInstance : ${companyList}">
-					<td th:text="${companyInstance.id}" width="150"></td>
-					<td th:text="${companyInstance.name}"></td>
+				<tr th:if="${#lists.isEmpty(adminList)}"><td colspan="3" class="text-center">No records found.</td></tr>
+				<tr th:each="admin : ${adminList}">
+					<td th:text="${admin.id}" width="150"></td>
+					<td th:text="${admin.firstName}"></td>
                     <td width="200"> 
-						<div class="modal fade" th:id="${'editModal' + companyInstance.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal fade" th:id="${'editModal' + admin.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 							<div class="modal-content">
 								<div class="modal-header">
-									<h1 class="modal-title fs-5" id="exampleModalLabel">Edit company</h1>
+									<h1 class="modal-title fs-5" id="exampleModalLabel">Edit adminstrator</h1>
 									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 								</div>
-								<form th:action="@{/admin/companies/save}" method="POST" th:object="${companyInstance}">
+								<form th:action="@{/admin/companies/save}" method="POST" th:object="${admin}">
 									<div class="modal-body">
 										<div class="input-container">
 											<label>Company Name</label>
 											<input name="id" type="hidden" th:value="*{id}" /> 
 											<input 
-												name="name"
+												name="firstName"
 												type="text" 
-												th:value="*{name}"
+												th:value="*{firstName}"
 												required 
 												autofocus="autofocus" />
 										</div>	
@@ -212,10 +212,10 @@
 							</div>
 						</div>
 
-						<button type="button" th:id="${'editModalOpenButton' + companyInstance.id}" class="btn btn-primary btn-sm" data-bs-toggle="modal" th:data-bs-target="${'#editModal' + companyInstance.id}">
+						<button type="button" th:id="${'editModalOpenButton' + admin.id}" class="btn btn-primary btn-sm" data-bs-toggle="modal" th:data-bs-target="${'#editModal' + admin.id}">
 							Edit
 						</button>
-					    <a th:href="@{/admin/companies/{id}/delete(id=${companyInstance.id})}" class="btn btn-danger btn-sm">Delete</a>
+					    <a th:href="@{/admin/companies/{id}/delete(id=${admin.id})}" class="btn btn-danger btn-sm">Delete</a>
 					</td>
 
 					
@@ -252,17 +252,17 @@
 		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="exampleModalLabel">New Company</h1>
+				<h1 class="modal-title fs-5" id="exampleModalLabel">New Administrator</h1>
 				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			</div>
-			<form th:action="@{/admin/companies/save}" method="POST" th:object="${company}">
+			<form th:action="@{/admin/administrator/save}" method="POST" th:object="${newAdmin}">
 				<div class="modal-body">
 					<div class="input-container">
-						<label for="name">Company Name</label>
+						<label for="name">Name</label>
 						<input 
 							id="name" 
 							type="text" 
-							th:field="*{name}"
+							th:field="*{firstName}"
 							required 
 							autofocus="autofocus" />
 					</div>	
