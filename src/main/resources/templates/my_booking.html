@@ -108,7 +108,10 @@
 					<td th:text="${b.seatNumber}"></td>
 					
 					
-                      <td> <a th:href="@{/user/cancelBooking/{id}(id=${b.id})}" class="btn btn-primary" style="background-color: red;">Request Cancel Booking</a>
+                      <td>
+						<a th:href = "@{/user/generateQR/{id}(id=${b.id})}" class="btn btn-primary btn-sm mb-3"> View QR</a>
+						<a th:href="@{/user/cancelBooking/{id}(id=${b.id})}" class="btn btn-primary btn-sm mb-3" style="background-color: red;">Request Cancel</a>
+						
 					</td>
 
 				</tr>

@@ -43,6 +43,9 @@ public class Booking {
     @JoinColumn(name = "purchased_by")
     private User user;
 
+	@Column(name = "qr_code")
+	private String qrCode;
+
 	public Booking() {
 	}
 	
@@ -104,6 +107,14 @@ public class Booking {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getQrCode() {
+		return qrCode;
+	}
+
+	public void setQrCode(String qrCode) {
+		this.qrCode = qrCode;
 	}
 }
 

@@ -1,10 +1,12 @@
 package net.javaguides.springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import net.javaguides.springboot.model.Booking;
 import net.javaguides.springboot.service.BookingService;
@@ -14,6 +16,9 @@ public class BookingController {
 
     @Autowired
     private BookingService BookingService;
+
+    @Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
     //display list of sold ticket
     @GetMapping("/view")
@@ -40,9 +45,12 @@ public class BookingController {
         return "redirect:/user/myBooking";
     }
 
-    @GetMapping("/user/viewTicket")
-    public String viewTicket (Model model){
-        
+    @GetMapping("/user/viewTicket/{id}")
+    public String viewTicket (@PathVariable ( value = "id") long id, Model model){
+            
+        Booking booking = BookingService.getById(id);
+        model.addAttribute("booking", booking);
+
         return "show_book";
     }
 
