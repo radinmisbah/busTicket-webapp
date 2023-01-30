@@ -40,8 +40,12 @@ public class BookingController {
     public String saveTicket(@ModelAttribute("booking") Booking booking){
 
         booking.setBookingStatus("Paid");
+
+        booking.setQrCode(passwordEncoder.encode(booking.toString()));
+
         //save ticket to database
-        BookingService.saveTicket(booking);
+        bookingService.saveTicket(booking);
+
         return "redirect:/user/myBooking";
     }
 
