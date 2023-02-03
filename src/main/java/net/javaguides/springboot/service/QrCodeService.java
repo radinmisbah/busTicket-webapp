@@ -35,20 +35,20 @@ public class QrCodeService {
 
         Path path = FileSystems.getDefault().getPath(filePath);
         MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
-            }
+    }
 
-        public synchronized void  createQr(String message){
-            try {
-                generateQRCodeImage(message, 350, 350, QR_CODE_IMAGE_PATH);
-              
-            } catch (WriterException e) {
-                System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());           
-            } catch (IOException e) {
-                System.out.println(e);
-            }
+    public synchronized void  createQr(String message){
+        try {
+            generateQRCodeImage(message, 350, 350, QR_CODE_IMAGE_PATH);
+            
+        } catch (WriterException e) {
+            System.out.println("Could not generate QR Code, WriterException :: " + e.getMessage());           
+        } catch (IOException e) {
+            System.out.println(e);
         }
+    }
 
-         // Function to read the QR file
+    // Function to read the QR file
     public static String readQR(String path, String charset,Map hashMap) throws FileNotFoundException, IOException,NotFoundException{
 
         BinaryBitmap binaryBitmap = new BinaryBitmap( new HybridBinarizer( new BufferedImageLuminanceSource(ImageIO.read(new FileInputStream(path)))));
@@ -56,8 +56,6 @@ public class QrCodeService {
         Result result = new MultiFormatReader().decode(binaryBitmap);
         return result.getText();
     }
-
-
 }
 
 
